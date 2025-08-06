@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ContractResponsePayload {
+public class ContractResponsePayloadV2 {
     
     @JsonProperty("success")
     private Boolean success;
@@ -19,7 +19,7 @@ public class ContractResponsePayload {
     private String message;
     
     @JsonProperty("data")
-    private ContractData data;
+    private ContractDataV2 data;
     
     @JsonProperty("errors")
     private List<Object> errors;
@@ -40,10 +40,10 @@ public class ContractResponsePayload {
     private Integer status;
     
     // Manual constructors since Lombok is not working
-    public ContractResponsePayload() {}
+    public ContractResponsePayloadV2() {}
     
-    public ContractResponsePayload(Boolean success, String message, ContractData data, List<Object> errors, 
-                                 String error, Object metadata, String timestamp, String path, Integer status) {
+    public ContractResponsePayloadV2(Boolean success, String message, ContractDataV2 data, List<Object> errors, 
+                                   String error, Object metadata, String timestamp, String path, Integer status) {
         this.success = success;
         this.message = message;
         this.data = data;
@@ -56,14 +56,14 @@ public class ContractResponsePayload {
     }
     
     // Manual builder method since Lombok is not working
-    public static ContractResponsePayloadBuilder builder() {
-        return new ContractResponsePayloadBuilder();
+    public static ContractResponsePayloadV2Builder builder() {
+        return new ContractResponsePayloadV2Builder();
     }
     
-    public static class ContractResponsePayloadBuilder {
+    public static class ContractResponsePayloadV2Builder {
         private Boolean success;
         private String message;
-        private ContractData data;
+        private ContractDataV2 data;
         private List<Object> errors;
         private String error;
         private Object metadata;
@@ -71,53 +71,53 @@ public class ContractResponsePayload {
         private String path;
         private Integer status;
         
-        public ContractResponsePayloadBuilder success(Boolean success) {
+        public ContractResponsePayloadV2Builder success(Boolean success) {
             this.success = success;
             return this;
         }
         
-        public ContractResponsePayloadBuilder message(String message) {
+        public ContractResponsePayloadV2Builder message(String message) {
             this.message = message;
             return this;
         }
         
-        public ContractResponsePayloadBuilder data(ContractData data) {
+        public ContractResponsePayloadV2Builder data(ContractDataV2 data) {
             this.data = data;
             return this;
         }
         
-        public ContractResponsePayloadBuilder errors(List<Object> errors) {
+        public ContractResponsePayloadV2Builder errors(List<Object> errors) {
             this.errors = errors;
             return this;
         }
         
-        public ContractResponsePayloadBuilder error(String error) {
+        public ContractResponsePayloadV2Builder error(String error) {
             this.error = error;
             return this;
         }
         
-        public ContractResponsePayloadBuilder metadata(Object metadata) {
+        public ContractResponsePayloadV2Builder metadata(Object metadata) {
             this.metadata = metadata;
             return this;
         }
         
-        public ContractResponsePayloadBuilder timestamp(String timestamp) {
+        public ContractResponsePayloadV2Builder timestamp(String timestamp) {
             this.timestamp = timestamp;
             return this;
         }
         
-        public ContractResponsePayloadBuilder path(String path) {
+        public ContractResponsePayloadV2Builder path(String path) {
             this.path = path;
             return this;
         }
         
-        public ContractResponsePayloadBuilder status(Integer status) {
+        public ContractResponsePayloadV2Builder status(Integer status) {
             this.status = status;
             return this;
         }
         
-        public ContractResponsePayload build() {
-            return new ContractResponsePayload(success, message, data, errors, error, metadata, timestamp, path, status);
+        public ContractResponsePayloadV2 build() {
+            return new ContractResponsePayloadV2(success, message, data, errors, error, metadata, timestamp, path, status);
         }
     }
     
@@ -125,7 +125,7 @@ public class ContractResponsePayload {
     @Getter
     @Setter
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public static class ContractData {
+    public static class ContractDataV2 {
         
         @JsonProperty("contractId")
         private String contractId;
@@ -163,18 +163,25 @@ public class ContractResponsePayload {
         @JsonProperty("laneDetails")
         private List<LaneDetail> laneDetails;
         
-        @JsonProperty("remarks")
-        private String remarks;
-        
         @JsonProperty("vendorName")
         private String vendorName;
         
-        // Manual constructors since Lombok is not working
-        public ContractData() {}
+        @JsonProperty("volumetricCoefficient")
+        private Integer volumetricCoefficient;
         
-        public ContractData(String contractId, String vendorId, String contractName, Long startDate, Long endDate,
-                          String serviceType, String contractType, String requestType, String status,
-                          String createdAt, String updatedAt, List<LaneDetail> laneDetails, String remarks, String vendorName) {
+        @JsonProperty("minChargableWt")
+        private Integer minChargableWt;
+        
+        @JsonProperty("minCharge")
+        private Integer minCharge;
+        
+        // Manual constructors since Lombok is not working
+        public ContractDataV2() {}
+        
+        public ContractDataV2(String contractId, String vendorId, String contractName, Long startDate, Long endDate,
+                             String serviceType, String contractType, String requestType, String status,
+                             String createdAt, String updatedAt, List<LaneDetail> laneDetails, String vendorName,
+                             Integer volumetricCoefficient, Integer minChargableWt, Integer minCharge) {
             this.contractId = contractId;
             this.vendorId = vendorId;
             this.contractName = contractName;
@@ -187,16 +194,18 @@ public class ContractResponsePayload {
             this.createdAt = createdAt;
             this.updatedAt = updatedAt;
             this.laneDetails = laneDetails;
-            this.remarks = remarks;
             this.vendorName = vendorName;
+            this.volumetricCoefficient = volumetricCoefficient;
+            this.minChargableWt = minChargableWt;
+            this.minCharge = minCharge;
         }
         
         // Manual builder method since Lombok is not working
-        public static ContractDataBuilder builder() {
-            return new ContractDataBuilder();
+        public static ContractDataV2Builder builder() {
+            return new ContractDataV2Builder();
         }
         
-        public static class ContractDataBuilder {
+        public static class ContractDataV2Builder {
             private String contractId;
             private String vendorId;
             private String contractName;
@@ -209,82 +218,95 @@ public class ContractResponsePayload {
             private String createdAt;
             private String updatedAt;
             private List<LaneDetail> laneDetails;
-            private String remarks;
             private String vendorName;
+            private Integer volumetricCoefficient;
+            private Integer minChargableWt;
+            private Integer minCharge;
             
-            public ContractDataBuilder contractId(String contractId) {
+            public ContractDataV2Builder contractId(String contractId) {
                 this.contractId = contractId;
                 return this;
             }
             
-            public ContractDataBuilder vendorId(String vendorId) {
+            public ContractDataV2Builder vendorId(String vendorId) {
                 this.vendorId = vendorId;
                 return this;
             }
             
-            public ContractDataBuilder contractName(String contractName) {
+            public ContractDataV2Builder contractName(String contractName) {
                 this.contractName = contractName;
                 return this;
             }
             
-            public ContractDataBuilder startDate(Long startDate) {
+            public ContractDataV2Builder startDate(Long startDate) {
                 this.startDate = startDate;
                 return this;
             }
             
-            public ContractDataBuilder endDate(Long endDate) {
+            public ContractDataV2Builder endDate(Long endDate) {
                 this.endDate = endDate;
                 return this;
             }
             
-            public ContractDataBuilder serviceType(String serviceType) {
+            public ContractDataV2Builder serviceType(String serviceType) {
                 this.serviceType = serviceType;
                 return this;
             }
             
-            public ContractDataBuilder contractType(String contractType) {
+            public ContractDataV2Builder contractType(String contractType) {
                 this.contractType = contractType;
                 return this;
             }
             
-            public ContractDataBuilder requestType(String requestType) {
+            public ContractDataV2Builder requestType(String requestType) {
                 this.requestType = requestType;
                 return this;
             }
             
-            public ContractDataBuilder status(String status) {
+            public ContractDataV2Builder status(String status) {
                 this.status = status;
                 return this;
             }
             
-            public ContractDataBuilder createdAt(String createdAt) {
+            public ContractDataV2Builder createdAt(String createdAt) {
                 this.createdAt = createdAt;
                 return this;
             }
             
-            public ContractDataBuilder updatedAt(String updatedAt) {
+            public ContractDataV2Builder updatedAt(String updatedAt) {
                 this.updatedAt = updatedAt;
                 return this;
             }
             
-            public ContractDataBuilder laneDetails(List<LaneDetail> laneDetails) {
+            public ContractDataV2Builder laneDetails(List<LaneDetail> laneDetails) {
                 this.laneDetails = laneDetails;
                 return this;
             }
             
-            public ContractDataBuilder remarks(String remarks) {
-                this.remarks = remarks;
-                return this;
-            }
-            
-            public ContractDataBuilder vendorName(String vendorName) {
+            public ContractDataV2Builder vendorName(String vendorName) {
                 this.vendorName = vendorName;
                 return this;
             }
             
-            public ContractData build() {
-                return new ContractData(contractId, vendorId, contractName, startDate, endDate, serviceType, 
-                                      contractType, requestType, status, createdAt, updatedAt, laneDetails, remarks, vendorName);
+            public ContractDataV2Builder volumetricCoefficient(Integer volumetricCoefficient) {
+                this.volumetricCoefficient = volumetricCoefficient;
+                return this;
+            }
+            
+            public ContractDataV2Builder minChargableWt(Integer minChargableWt) {
+                this.minChargableWt = minChargableWt;
+                return this;
+            }
+            
+            public ContractDataV2Builder minCharge(Integer minCharge) {
+                this.minCharge = minCharge;
+                return this;
+            }
+            
+            public ContractDataV2 build() {
+                return new ContractDataV2(contractId, vendorId, contractName, startDate, endDate, serviceType, 
+                                        contractType, requestType, status, createdAt, updatedAt, laneDetails, vendorName,
+                                        volumetricCoefficient, minChargableWt, minCharge);
             }
         }
     }

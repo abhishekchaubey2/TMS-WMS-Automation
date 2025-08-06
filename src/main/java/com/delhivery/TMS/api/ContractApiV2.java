@@ -1,7 +1,8 @@
 package com.delhivery.TMS.api;
 
 import com.delhivery.TMS.pojo.contracts.request.ContractRequestPayloadV2;
-import com.delhivery.TMS.pojo.contracts.response.ContractResponsePayload;
+import com.delhivery.TMS.pojo.contracts.request.ContractRequestPayload;
+import com.delhivery.TMS.pojo.contracts.response.ContractResponsePayloadV2;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
 
@@ -30,6 +31,25 @@ public class ContractApiV2 {
      * @return Response from the API
      */
     public static Response createContract(ContractRequestPayloadV2 requestPayload) {
+        return createContract(requestPayload, false);
+    }
+    
+    /**
+     * Create a new contract with ContractRequestPayload
+     * @param requestPayload The contract request payload
+     * @param isSubmit Whether to submit the contract
+     * @return Response from the API
+     */
+    public static Response createContract(ContractRequestPayload requestPayload, boolean isSubmit) {
+        return TmsRestResource.post(CONTRACTS_ENDPOINT, requestPayload, isSubmit);
+    }
+    
+    /**
+     * Create a new contract with ContractRequestPayload (default submit=false)
+     * @param requestPayload The contract request payload
+     * @return Response from the API
+     */
+    public static Response createContract(ContractRequestPayload requestPayload) {
         return createContract(requestPayload, false);
     }
     

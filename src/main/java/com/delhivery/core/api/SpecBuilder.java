@@ -112,7 +112,7 @@ public class SpecBuilder {
     
     public static RequestSpecification getTmsRequestSpecWithAuth(String userId, String userName) {
         // Generate new token every time
-        System.out.println("Generating new TMS token...");
+            System.out.println("Generating new TMS token...");
         String tmsToken = TokenManager.generateXCoreosAuthToken();
         
         // Use the same token for both x-coreos-auth and x-coreos-access

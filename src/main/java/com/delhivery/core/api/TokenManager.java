@@ -39,7 +39,7 @@ public class TokenManager {
     public static TokenManager getInstance() {
         if (instance == null) {
             instanceLock.lock();
-            try {
+        try {
                 if (instance == null) {
                     instance = new TokenManager();
                 }
@@ -48,8 +48,8 @@ public class TokenManager {
             }
         }
         return instance;
-    }
-    
+            }
+            
     /**
      * Generates a fresh X-CoreOS auth token for the specified user
      * Thread-safe and supports multiple users simultaneously
@@ -87,8 +87,8 @@ public class TokenManager {
      */
     public static String getToken(String tokenType) {
         return generateXCoreosAuthToken();
-    }
-    
+            }
+            
     /**
      * Gets or creates a lock for a specific user
      * Thread-safe lock management

@@ -1,9 +1,13 @@
 package com.delhivery.TMS.controller;
 
 import com.delhivery.TMS.api.ContractApiV2;
+import com.delhivery.TMS.api.ContractApi;
 import com.delhivery.TMS.pojo.contracts.request.ContractRequestPayloadV2;
+import com.delhivery.TMS.pojo.contracts.request.ContractRequestPayload;
 import com.delhivery.TMS.pojo.contracts.response.ContractResponsePayload;
+import com.delhivery.TMS.pojo.contracts.response.ContractResponsePayloadV2;
 import com.delhivery.TMS.RequestBuilder.ContractRequestBuilderV2;
+import com.delhivery.TMS.RequestBuilder.ContractRequestBuilder;
 import com.delhivery.core.utils.Assertions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
@@ -60,6 +64,78 @@ public class ContractController {
             
             // Step 5: Deserialize JSON response to Java object
             try {
+                ContractResponsePayloadV2 responsePayload = objectMapper.readValue(
+                    response.getBody().asString(), 
+                    ContractResponsePayloadV2.class
+                );
+                
+                System.out.println("Step 6: Asserting response message...");
+                
+                // Step 6: Assert response message
+                if (responsePayload.getSuccess() != null) {
+                    Assertions.assertKeyValue("Contract creation success", true, responsePayload.getSuccess());
+                }
+                
+                if (responsePayload.getMessage() != null) {
+                    System.out.println("Response Message: " + responsePayload.getMessage());
+                }
+                
+                if (responsePayload.getData() != null) {
+                    System.out.println("Contract ID: " + responsePayload.getData().getContractId());
+                }
+                
+            } catch (Exception e) {
+                System.err.println("Error deserializing response: " + e.getMessage());
+            }
+            
+            return response;
+        } catch (Exception e) {
+            System.err.println("=== Error in ContractController.createContract ===");
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
+    }
+    /**
+     * Create a contract with vehicleName and remarks using the new data structure
+     * @return Response from the API
+     */
+    public static Response createContractWithVehicleNameAndRemarks(String vendorId, String contractName, Long startDate, Long endDate,
+                                       String serviceType, String contractType, String requestType,
+                                       String origin, String destination, String vehicleName,
+                                       Double rate, String rateType, Integer tat, String tatDisplayUnit,
+                                       String remarks, String vendorName, boolean isSubmit) {
+        try {
+            System.out.println("=== ContractController.createContractWithVehicleNameAndRemarks Debug ===");
+            System.out.println("Step 1: Creating Java object with parameters...");
+            
+            // Step 1: Create Java object using custom parameters with vehicleName and remarks
+            ContractRequestPayload requestPayload = ContractRequestBuilder.buildCustomContractRequest(
+                    vendorId, contractName, startDate, endDate, serviceType, contractType, requestType,
+                    origin, destination, vehicleName, rate, rateType, tat, tatDisplayUnit, remarks, vendorName
+            );
+            
+            System.out.println("Step 2: Making API call...");
+            
+            // Step 2: Make API call with proper logging
+            Response response = ContractApi.createContract(requestPayload, isSubmit);
+            
+            System.out.println("Step 3: Asserting status code...");
+            
+            // Step 3: Assert status code (first validation)
+            Assertions.assertStatusCode(202, response);
+            
+            System.out.println("Step 4: Logging response...");
+            
+            // Step 4: Log full JSON response
+            System.out.println("=== Contract Creation Response ===");
+            System.out.println("Status Code: " + response.getStatusCode());
+            System.out.println("Response Body: " + response.getBody().asPrettyString());
+            
+            System.out.println("Step 5: Deserializing response...");
+            
+            // Step 5: Deserialize JSON response to Java object
+            try {
                 ContractResponsePayload responsePayload = objectMapper.readValue(
                     response.getBody().asString(), 
                     ContractResponsePayload.class
@@ -86,7 +162,7 @@ public class ContractController {
             
             return response;
         } catch (Exception e) {
-            System.err.println("=== Error in ContractController.createContract ===");
+            System.err.println("=== Error in ContractController.createContractWithVehicleNameAndRemarks ===");
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
             throw e;

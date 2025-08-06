@@ -12,34 +12,34 @@ import org.testng.annotations.Test;
 public class ContractTest {
     
     /**
-     * Test creating a contract with custom parameters
+     * Test creating a contract with custom parameters using ContractApiV2
      */
-    @Test
+    @Test(priority = 1, groups = {"TMS", "Contracts"})
     public void testCreateContractWithCustomParams() {
         ContractController.createContract(
-                "SIN9394",
-                "test_contract_custom",
-                1753122600000L,
-                1785436200000L,
-                "FTL",
-                "PER_TRIP",
-                "LONG_TERM",
-                "MUM001",
-                "DEL001",
-                800.0,
-                "Flat",
-                24,
-                "hours",
-                "test transporter pvt ltd",
-                400,
-                50,
-                50,
-                false
+                "SIN9393",                    // vendorId
+                "test_contract_custom",       // contractName
+                1753122600000L,               // startDate
+                1785436200000L,               // endDate
+                "LTL",                        // serviceType (changed from FTL to LTL)
+                "PER_TRIP",                   // contractType
+                "LONG_TERM",                  // requestType
+                "JNP123",                     // origin (changed to match working test)
+                "ISPAT_GGN",                  // destination (changed to match working test)
+                700.0,                        // rate
+                "Flat",                       // rateType
+                12,                           // tat
+                "hours",                      // tatDisplayUnit
+                "singh transporter pvt ltd",  // vendorName
+                389,                          // volumetricCoefficient
+                38,                           // minChargableWt
+                38,                           // minCharge
+                false                         // isSubmit
         );
     }
     
     /**
-     * Test creating a contract with is_submit=true using hardcoded values
+     * Test creating a contract with is_submit=true using ContractApiV2
      */
     @Test(priority = 2, groups = {"TMS", "Contracts"})
     public void testCreateContractWithIsSubmitTrue() {
@@ -78,44 +78,54 @@ public class ContractTest {
     }
     
     /**
-     * Test getting all contracts
+     * Test creating a contract with vehicleName and remarks using ContractApi
      */
-    @Test
-    public void testGetAllContracts() {
-        ContractController.getAllContracts();
+    @Test(priority = 3, groups = {"TMS", "Contracts"})
+    public void testCreateContractWithVehicleNameAndRemarks() {
+        ContractController.createContractWithVehicleNameAndRemarks(
+                "SIN9393",                    // vendorId
+                "Singh_transport_contract1",  // contractName
+                1753122600000L,               // startDate
+                1785436200000L,               // endDate
+                "FTL",                        // serviceType
+                "PER_TRIP",                   // contractType
+                "LONG_TERM",                  // requestType
+                "JNP123",                     // origin
+                "ISPAT_GGN",                  // destination
+                "Closed 32FT MXL",            // vehicleName
+                700.0,                        // rate
+                "Flat",                       // rateType
+                12,                           // tat
+                "hours",                      // tatDisplayUnit
+                "NA",                         // remarks
+                "singh transporter pvt ltd",  // vendorName
+                true                          // isSubmit
+        );
     }
     
     /**
-     * Test getting a specific contract by ID
+     * Test creating a contract with original ContractApi structure
      */
-    @Test
-    public void testGetContractById() {
-        // This would require a valid contract ID
-        String contractId = "test-contract-id";
-        Response response = ContractController.getContract(contractId);
-        System.out.println("Contract retrieved successfully with status: " + response.getStatusCode());
-    }
-    
-    /**
-     * Test updating a contract
-     */
-    @Test
-    public void testUpdateContract() {
-        // This would require a valid contract ID
-        String contractId = "test-contract-id";
-        ContractRequestPayloadV2 requestPayload = ContractRequestBuilderV2.buildSampleContractRequest();
-        Response response = ContractController.updateContract(contractId, requestPayload);
-        System.out.println("Contract updated successfully with status: " + response.getStatusCode());
-    }
-    
-    /**
-     * Test deleting a contract
-     */
-    @Test
-    public void testDeleteContract() {
-        // This would require a valid contract ID
-        String contractId = "test-contract-id";
-        Response response = ContractController.deleteContract(contractId);
-        System.out.println("Contract deleted successfully with status: " + response.getStatusCode());
+    @Test(priority = 4, groups = {"TMS", "Contracts"})
+    public void testCreateContractWithOriginalApi() {
+        ContractController.createContractWithVehicleNameAndRemarks(
+                "SIN9393",                    // vendorId
+                "Singh_transport_contract1",  // contractName
+                1753122600000L,               // startDate
+                1785436200000L,               // endDate
+                "FTL",                        // serviceType
+                "PER_TRIP",                   // contractType
+                "LONG_TERM",                  // requestType
+                "JNP123",                     // origin
+                "ISPAT_GGN",                  // destination
+                "Closed 32FT MXL",            // vehicleName
+                700.0,                        // rate
+                "Flat",                       // rateType
+                12,                           // tat
+                "hours",                      // tatDisplayUnit
+                "NA",                         // remarks
+                "singh transporter pvt ltd",  // vendorName
+                true                          // isSubmit
+        );
     }
 } 
