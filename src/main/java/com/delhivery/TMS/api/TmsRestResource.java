@@ -1,28 +1,26 @@
 package com.delhivery.TMS.api;
 
 import com.delhivery.core.api.SpecBuilder;
-import com.delhivery.core.utils.Utilities;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-import static com.delhivery.core.utils.Utilities.logCodeBlock;
-import static com.delhivery.core.utils.Utilities.logInfo;
 import static io.restassured.RestAssured.given;
 
 /**
- * TMS-specific RestResource for HTTP calls
- * Handles TMS API requests with proper logging and validation
+ * TMS REST Resource for making HTTP calls
+ * Handles dynamic is_submit parameter and proper logging
  */
 public class TmsRestResource {
     
     private static final String TMS_BASE_PATH = "/tms/api/v2";
+    private static final ObjectMapper objectMapper = new ObjectMapper();
     
     /**
-     * POST request for TMS APIs
-     * @param endpoint The API endpoint (without base path)
+     * Make a POST request with dynamic is_submit parameter
+     * @param endpoint The API endpoint
      * @param requestBody The request body object
-     * @param isSubmit Whether to submit the contract (for contracts API)
+     * @param isSubmit Whether to submit the contract
      * @return Response from the API
      */
     public static Response post(String endpoint, Object requestBody, boolean isSubmit) {
@@ -33,12 +31,7 @@ public class TmsRestResource {
         System.out.println("Endpoint: " + TMS_BASE_PATH + endpoint);
         System.out.println("Method: POST");
         System.out.println("is_submit: " + isSubmit);
-        
-        try {
-            System.out.println("Request Body: " + Utilities.jsonObjectToString(requestBody));
-        } catch (JsonProcessingException e) {
-            System.out.println("Request Body: " + requestBody.toString());
-        }
+        System.out.println("Request Body: " + (requestBody != null ? convertObjectToJson(requestBody) : "null"));
         
         // Make the API call
         Response response = given()
@@ -60,18 +53,8 @@ public class TmsRestResource {
     }
     
     /**
-     * POST request for TMS APIs (default isSubmit=false)
-     * @param endpoint The API endpoint (without base path)
-     * @param requestBody The request body object
-     * @return Response from the API
-     */
-    public static Response post(String endpoint, Object requestBody) {
-        return post(endpoint, requestBody, false);
-    }
-    
-    /**
-     * GET request for TMS APIs
-     * @param endpoint The API endpoint (without base path)
+     * Make a GET request
+     * @param endpoint The API endpoint
      * @return Response from the API
      */
     public static Response get(String endpoint) {
@@ -100,8 +83,8 @@ public class TmsRestResource {
     }
     
     /**
-     * PUT request for TMS APIs
-     * @param endpoint The API endpoint (without base path)
+     * Make a PUT request
+     * @param endpoint The API endpoint
      * @param requestBody The request body object
      * @return Response from the API
      */
@@ -112,12 +95,7 @@ public class TmsRestResource {
         System.out.println("=== TMS API Request ===");
         System.out.println("Endpoint: " + TMS_BASE_PATH + endpoint);
         System.out.println("Method: PUT");
-        
-        try {
-            System.out.println("Request Body: " + Utilities.jsonObjectToString(requestBody));
-        } catch (JsonProcessingException e) {
-            System.out.println("Request Body: " + requestBody.toString());
-        }
+        System.out.println("Request Body: " + (requestBody != null ? convertObjectToJson(requestBody) : "null"));
         
         // Make the API call
         Response response = given()
@@ -138,8 +116,8 @@ public class TmsRestResource {
     }
     
     /**
-     * DELETE request for TMS APIs
-     * @param endpoint The API endpoint (without base path)
+     * Make a DELETE request
+     * @param endpoint The API endpoint
      * @return Response from the API
      */
     public static Response delete(String endpoint) {
@@ -165,5 +143,18 @@ public class TmsRestResource {
         System.out.println("Response Body: " + response.getBody().asPrettyString());
         
         return response;
+    }
+    
+    /**
+     * Convert object to JSON string for logging
+     * @param obj The object to convert
+     * @return JSON string
+     */
+    private static String convertObjectToJson(Object obj) {
+        try {
+            return objectMapper.writeValueAsString(obj);
+        } catch (Exception e) {
+            return "Error converting object to JSON: " + e.getMessage();
+        }
     }
 } 

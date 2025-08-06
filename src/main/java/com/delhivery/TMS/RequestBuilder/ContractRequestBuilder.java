@@ -9,15 +9,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Request Builder for TMS Contracts API
+ * TMS Contract Request Builder
+ * Builds ContractRequestPayload objects with dynamic is_submit handling
  */
 public class ContractRequestBuilder {
     
     /**
-     * Build a sample contract request payload
+     * Build a sample contract request with all fields
+     * @param isSubmit Whether to submit the contract (affects field nullification)
+     * @return ContractRequestPayload
      */
-    public static ContractRequestPayload buildSampleContractRequest() {
-        return ContractRequestPayload.builder()
+    public static ContractRequestPayload buildSampleContractRequest(boolean isSubmit) {
+        List<LaneDetail> laneDetails = new ArrayList<>();
+        
+        LaneDetail laneDetail = LaneDetail.builder()
+                .origin("JNP123")
+                .destination("ISPAT_GGN")
+                .vehicleName("Closed 32FT MXL")
+                .rateDetails(RateDetails.builder()
+                        .rate(700.0)
+                        .rateType("Flat")
+                        .build())
+                .transitDetails(TransitDetails.builder()
+                        .tat(12)
+                        .tatDisplayUnit("hours")
+                        .build())
+                .build();
+        
+        laneDetails.add(laneDetail);
+        
+        ContractRequestPayload requestPayload = ContractRequestPayload.builder()
                 .vendorId("SIN9393")
                 .contractName("Singh_transport_contract1")
                 .startDate(1753122600000L)
@@ -25,52 +46,43 @@ public class ContractRequestBuilder {
                 .serviceType("FTL")
                 .contractType("PER_TRIP")
                 .requestType("LONG_TERM")
-                .laneDetails(buildSampleLaneDetails())
+                .laneDetails(laneDetails)
                 .remarks("NA")
                 .vendorName("singh transporter pvt ltd")
-                .build();
-    }
-    
-    /**
-     * Build lane details for the contract
-     */
-    private static List<LaneDetail> buildSampleLaneDetails() {
-        List<LaneDetail> laneDetails = new ArrayList<>();
-        
-        LaneDetail laneDetail = LaneDetail.builder()
-                .origin("JNP123")
-                .destination("ISPAT_GGN")
-                .vehicleName("Closed 32FT MXL")
-                .rateDetails(buildRateDetails())
-                .transitDetails(buildTransitDetails())
+                .volumetricCoefficient(389)
+                .minChargableWt(38)
+                .minCharge(38)
                 .build();
         
-        laneDetails.add(laneDetail);
-        return laneDetails;
+        // Apply conditional nullification based on is_submit
+        requestPayload.applyConditionalNullification(isSubmit);
+        
+        return requestPayload;
     }
     
     /**
-     * Build rate details for the lane
-     */
-    private static RateDetails buildRateDetails() {
-        return RateDetails.builder()
-                .rate(700.0)
-                .rateType("Flat")
-                .build();
-    }
-    
-    /**
-     * Build transit details for the lane
-     */
-    private static TransitDetails buildTransitDetails() {
-        return TransitDetails.builder()
-                .tat(12)
-                .tatDisplayUnit("hours")
-                .build();
-    }
-    
-    /**
-     * Build custom contract request with provided parameters
+     * Build a custom contract request with provided parameters
+     * @param vendorId Vendor ID
+     * @param contractName Contract name
+     * @param startDate Start date
+     * @param endDate End date
+     * @param serviceType Service type
+     * @param contractType Contract type
+     * @param requestType Request type
+     * @param origin Origin
+     * @param destination Destination
+     * @param vehicleName Vehicle name
+     * @param rate Rate
+     * @param rateType Rate type
+     * @param tat TAT
+     * @param tatDisplayUnit TAT display unit
+     * @param remarks Remarks
+     * @param vendorName Vendor name
+     * @param volumetricCoefficient Volumetric coefficient
+     * @param minChargableWt Minimum chargable weight
+     * @param minCharge Minimum charge
+     * @param isSubmit Whether to submit the contract (affects field nullification)
+     * @return ContractRequestPayload
      */
     public static ContractRequestPayload buildCustomContractRequest(
             String vendorId,
@@ -88,7 +100,11 @@ public class ContractRequestBuilder {
             Integer tat,
             String tatDisplayUnit,
             String remarks,
-            String vendorName) {
+            String vendorName,
+            Integer volumetricCoefficient,
+            Integer minChargableWt,
+            Integer minCharge,
+            boolean isSubmit) {
         
         List<LaneDetail> laneDetails = new ArrayList<>();
         
@@ -108,7 +124,7 @@ public class ContractRequestBuilder {
         
         laneDetails.add(laneDetail);
         
-        return ContractRequestPayload.builder()
+        ContractRequestPayload requestPayload = ContractRequestPayload.builder()
                 .vendorId(vendorId)
                 .contractName(contractName)
                 .startDate(startDate)
@@ -119,6 +135,14 @@ public class ContractRequestBuilder {
                 .laneDetails(laneDetails)
                 .remarks(remarks)
                 .vendorName(vendorName)
+                .volumetricCoefficient(volumetricCoefficient)
+                .minChargableWt(minChargableWt)
+                .minCharge(minCharge)
                 .build();
+        
+        // Apply conditional nullification based on is_submit
+        requestPayload.applyConditionalNullification(isSubmit);
+        
+        return requestPayload;
     }
 } 

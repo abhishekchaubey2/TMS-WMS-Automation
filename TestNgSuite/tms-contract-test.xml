@@ -5,10 +5,7 @@
         <classes>
             <class name="com.delhivery.TMS.controller.ContractTest">
                 <methods>
-                    <include name="testCreateContractWithCustomParams"/>
-                    <include name="testCreateContractWithIsSubmitTrue"/>
-                    <include name="testCreateContractWithVehicleNameAndRemarks"/>
-                    <include name="testCreateContractWithOriginalApi"/>
+                    <include name="testCreateContractWithDynamicIsSubmit"/>
                 </methods>
             </class>
         </classes>
