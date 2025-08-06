@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CMU Regression 1"  parallel="tests" thread-count="500">
+
+    <!-- Meesho Regression Tests Done-->
+    <test name="Meesho Tests" group-by-instances="true" parallel="methods">
+        <classes>
+            <!-- Test class for Meesho success, error, and failure manifestation -->
+            <class name="com.delhivery.Express.testModules.RegressionScripts.Meesho"/>
+        </classes>
+    </test>
+
+    <!-- Internal Client Details Fetch cases  Done-->
+    <test name="Internal Client Details Fetch" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.PackageFlow.TestScript"/>
+        </classes>
+    </test>
+
+    <!-- Client Configuration Tests Done-->
+    <test name="Client Configuration" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.PackageFlow.ClientConfigTest"/>
+        </classes>
+    </test>
+
+    <!-- ApplyNSL Tests DONE-->
+    <test name="ApplyNSL" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.applynsl.ApplyNsl107"/>
+        </classes>
+    </test>
+
+    <!-- Apply NSL Test Done-->
+    <test name="Package_Flows_Apply_Nsl" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.PackageFlow.ApplyNslTesting.ApplyNsl"/>
+        </classes>
+    </test>
+
+    <!-- Apply NSL Generic Tests  DONE-->
+    <test name="Package_Flows_Generic_Nsl" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.PackageFlow.ApplyNslTesting.ApplyNslGeneric"/>
+        </classes>
+    </test>
+
+    <!-- LMSyncV1 Tests Done-->
+    <test name="LMSyncV1" group-by-instances="true" parallel="methods">
+        <classes>
+            <!-- Test scenarios for LMSyncV1 -->
+            <class name="com.delhivery.Express.testModules.PackageFlow.ApplyNslTesting.LMSyncV1"/>
+        </classes>
+    </test>
+
+    <!-- LMSyncV2 Tests  Code Commented-->
+    <test name="Billing Method Test Cases" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.PackageFlow.BillingMethodCases"/>
+        </classes>
+    </test>
+
+    <!-- ApplyNSL2 Tests  DONE-->
+    <test name="ApplyNSL2" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.applynsl.ApplySt6w"/>
+        </classes>
+    </test>
+
+    <!-- EDUpdation Tests DONE-->
+    <test name="EDUpdation" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.DatesRelatedCases.EdUpdation"/>
+        </classes>
+    </test>
+
+    <!-- UnsetReturnDdIdForB2B Tests DONE-->
+    <test name="UnsetReturnDdIdForB2B" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.PackageFlow.UnsetReturnDDId.UnsetReturnDdIdForB2B"/>
+        </classes>
+    </test>
+
+    <!-- UnsetReturnDdIdForHeavy Tests DONE-->
+    <test name="UnsetReturnDdIdForHeavy" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.PackageFlow.UnsetReturnDDId.UnsetReturnDdIdForHeavy"/>
+        </classes>
+    </test>
+
+    <!-- UnsetReturnDdIdForB2CAndDoc Tests DONE-->
+    <test name="UnsetReturnDdIdForB2CAndDoc" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.PackageFlow.UnsetReturnDDId.UnsetReturnDdIdForB2CAndDoc"/>
+        </classes>
+    </test>
+
+    <test name="Qc_fail_when_qty_more_than_two" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.PackageFlow.QcModule"/>
+        </classes>
+    </test>
+
+     <!-- ApplyNSL DTUP-ZL Tests DONE-->
+    <test name="ApplyNSLDTUP" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.PackageFlow.ApplyNslTesting.applynslDTUP"/>
+        </classes>
+    </test>
+
+     <!-- ApplyNSL DTUP-ZL Tests DONE-->
+    <test name="ApplyNSLDTUP2" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.PackageFlow.ApplyNslTesting.applynslDTUP2"/>
+        </classes>
+    </test>
+
+    <test name="BagPriority" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.RegressionScripts.BagPriority"/>
+        </classes>
+    </test>
+
+
+    <!--    <test name="Package_Flows_apply_nsl" group-by-instances="true">-->
+    <!--        <classes>-->
+    <!--            <class name="com.delhivery.Express.testModules.PackageFlow.ApplyNslTesting.applynsl" />-->
+    <!--        </classes>-->
+    <!--    </test>-->
+
+
+    <!--    <test name="Package_Flows_Generic_Nsl2" group-by-instances="true">-->
+    <!--        <classes>-->
+    <!--            <class name="com.delhivery.Express.testModules.PackageFlow.ApplyNslTesting.ApplyNslGeneric2" />-->
+    <!--        </classes>-->
+    <!--    </test>-->
+
+</suite>

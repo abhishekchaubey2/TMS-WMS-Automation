@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CMU Regression" parallel="tests" thread-count="40">
+    <test name="InternationalCustomTemplateServiceability" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ServiceabilityService.InternationalCustomTemplateServiceability"/>
+        </classes>
+    </test>
+    <test name="InternationalCustomTemplateServiceability2" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ServiceabilityService.InternationalCustomTemplateServiceability2"/>
+        </classes>
+    </test>
+    <test name="InternationalCustomTemplateServiceability3" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ServiceabilityService.InternationalCustomTemplateServiceability3"/>
+        </classes>
+    </test>
+    <test name="PdtBasedForwardServiceability" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ServiceabilityService.PdtBasedForwardServiceability"/>
+        </classes>
+    </test>
+    <test name="PdtBasedForwardServiceability2" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ServiceabilityService.PdtBasedForwardServiceability2"/>
+        </classes>
+    </test>
+    <test name="PdtBasedForwardServiceability3" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ServiceabilityService.PdtBasedForwardServiceability3"/>
+        </classes>
+    </test>
+    <test name="PdtBasedForwardServiceability4" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ServiceabilityService.PdtBasedForwardServiceability4"/>
+        </classes>
+    </test>
+    <test name="PdtBasedForwardServiceability5" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ServiceabilityService.PdtBasedForwardServiceability5"/>
+        </classes>
+    </test>
+</suite>

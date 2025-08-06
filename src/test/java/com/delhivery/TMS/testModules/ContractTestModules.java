@@ -1,0 +1,347 @@
+package com.delhivery.TMS.testModules;
+
+import com.delhivery.TMS.api.ContractApiV2;
+import com.delhivery.TMS.dataprovider.ContractDataProvider;
+import com.delhivery.core.utils.Assertions;
+import io.restassured.response.Response;
+import org.testng.annotations.Test;
+
+/**
+ * TMS Contract Test Modules with Data Provider Integration
+ */
+public class ContractTestModules {
+    
+    /**
+     * Test contract creation with data provider
+     */
+    @Test(dataProvider = "contractCreationData", dataProviderClass = ContractDataProvider.class)
+    public void testContractCreationWithDataProvider(
+            String vendorId,
+            String contractName,
+            Long startDate,
+            Long endDate,
+            String serviceType,
+            String contractType,
+            String requestType,
+            String origin,
+            String destination,
+            Double rate,
+            String rateType,
+            Integer tat,
+            String tatDisplayUnit,
+            String vendorName,
+            Integer volumetricCoefficient,
+            Integer minChargableWt,
+            Integer minCharge,
+            boolean isSubmit) {
+        
+        Response response = ContractApiV2.createContractWithParams(
+                vendorId, contractName, startDate, endDate, serviceType, contractType, requestType,
+                origin, destination, rate, rateType, tat, tatDisplayUnit, vendorName,
+                volumetricCoefficient, minChargableWt, minCharge, isSubmit
+        );
+        
+        Assertions.assertStatusCode(200, response);
+        Assertions.assertIfNotNull("Response", response);
+    }
+    
+    /**
+     * Test contract creation with different service types
+     */
+    @Test(dataProvider = "contractServiceTypes", dataProviderClass = ContractDataProvider.class)
+    public void testContractCreationWithDifferentServiceTypes(String serviceType) {
+        Response response = ContractApiV2.createContractWithParams(
+                "SIN9393",
+                "test_contract_" + serviceType,
+                1753122600000L,
+                1785436200000L,
+                serviceType,
+                "PER_TRIP",
+                "LONG_TERM",
+                "JNP123",
+                "ISPAT_GGN",
+                700.0,
+                "Flat",
+                12,
+                "hours",
+                "singh transporter pvt ltd",
+                389,
+                38,
+                38,
+                false
+        );
+        
+        Assertions.assertStatusCode(200, response);
+        Assertions.assertIfNotNull("Response", response);
+    }
+    
+    /**
+     * Test contract creation with different contract types
+     */
+    @Test(dataProvider = "contractTypes", dataProviderClass = ContractDataProvider.class)
+    public void testContractCreationWithDifferentContractTypes(String contractType) {
+        Response response = ContractApiV2.createContractWithParams(
+                "SIN9393",
+                "test_contract_" + contractType,
+                1753122600000L,
+                1785436200000L,
+                "LTL",
+                contractType,
+                "LONG_TERM",
+                "JNP123",
+                "ISPAT_GGN",
+                700.0,
+                "Flat",
+                12,
+                "hours",
+                "singh transporter pvt ltd",
+                389,
+                38,
+                38,
+                false
+        );
+        
+        Assertions.assertStatusCode(200, response);
+        Assertions.assertIfNotNull("Response", response);
+    }
+    
+    /**
+     * Test contract creation with different request types
+     */
+    @Test(dataProvider = "contractRequestTypes", dataProviderClass = ContractDataProvider.class)
+    public void testContractCreationWithDifferentRequestTypes(String requestType) {
+        Response response = ContractApiV2.createContractWithParams(
+                "SIN9393",
+                "test_contract_" + requestType,
+                1753122600000L,
+                1785436200000L,
+                "LTL",
+                "PER_TRIP",
+                requestType,
+                "JNP123",
+                "ISPAT_GGN",
+                700.0,
+                "Flat",
+                12,
+                "hours",
+                "singh transporter pvt ltd",
+                389,
+                38,
+                38,
+                false
+        );
+        
+        Assertions.assertStatusCode(200, response);
+        Assertions.assertIfNotNull("Response", response);
+    }
+    
+    /**
+     * Test contract creation with different rate types
+     */
+    @Test(dataProvider = "contractRateTypes", dataProviderClass = ContractDataProvider.class)
+    public void testContractCreationWithDifferentRateTypes(String rateType) {
+        Response response = ContractApiV2.createContractWithParams(
+                "SIN9393",
+                "test_contract_" + rateType.replace(" ", "_"),
+                1753122600000L,
+                1785436200000L,
+                "LTL",
+                "PER_TRIP",
+                "LONG_TERM",
+                "JNP123",
+                "ISPAT_GGN",
+                700.0,
+                rateType,
+                12,
+                "hours",
+                "singh transporter pvt ltd",
+                389,
+                38,
+                38,
+                false
+        );
+        
+        Assertions.assertStatusCode(200, response);
+        Assertions.assertIfNotNull("Response", response);
+    }
+    
+    /**
+     * Test contract creation with different TAT units
+     */
+    @Test(dataProvider = "contractTatUnits", dataProviderClass = ContractDataProvider.class)
+    public void testContractCreationWithDifferentTatUnits(String tatDisplayUnit) {
+        Response response = ContractApiV2.createContractWithParams(
+                "SIN9393",
+                "test_contract_" + tatDisplayUnit,
+                1753122600000L,
+                1785436200000L,
+                "LTL",
+                "PER_TRIP",
+                "LONG_TERM",
+                "JNP123",
+                "ISPAT_GGN",
+                700.0,
+                "Flat",
+                12,
+                tatDisplayUnit,
+                "singh transporter pvt ltd",
+                389,
+                38,
+                38,
+                false
+        );
+        
+        Assertions.assertStatusCode(200, response);
+        Assertions.assertIfNotNull("Response", response);
+    }
+    
+    /**
+     * Test contract creation with different origins
+     */
+    @Test(dataProvider = "contractOrigins", dataProviderClass = ContractDataProvider.class)
+    public void testContractCreationWithDifferentOrigins(String origin) {
+        Response response = ContractApiV2.createContractWithParams(
+                "SIN9393",
+                "test_contract_" + origin,
+                1753122600000L,
+                1785436200000L,
+                "LTL",
+                "PER_TRIP",
+                "LONG_TERM",
+                origin,
+                "ISPAT_GGN",
+                700.0,
+                "Flat",
+                12,
+                "hours",
+                "singh transporter pvt ltd",
+                389,
+                38,
+                38,
+                false
+        );
+        
+        Assertions.assertStatusCode(200, response);
+        Assertions.assertIfNotNull("Response", response);
+    }
+    
+    /**
+     * Test contract creation with different destinations
+     */
+    @Test(dataProvider = "contractDestinations", dataProviderClass = ContractDataProvider.class)
+    public void testContractCreationWithDifferentDestinations(String destination) {
+        Response response = ContractApiV2.createContractWithParams(
+                "SIN9393",
+                "test_contract_" + destination,
+                1753122600000L,
+                1785436200000L,
+                "LTL",
+                "PER_TRIP",
+                "LONG_TERM",
+                "JNP123",
+                destination,
+                700.0,
+                "Flat",
+                12,
+                "hours",
+                "singh transporter pvt ltd",
+                389,
+                38,
+                38,
+                false
+        );
+        
+        Assertions.assertStatusCode(200, response);
+        Assertions.assertIfNotNull("Response", response);
+    }
+    
+    /**
+     * Test contract creation with different vendors
+     */
+    @Test(dataProvider = "contractVendors", dataProviderClass = ContractDataProvider.class)
+    public void testContractCreationWithDifferentVendors(String vendorId, String vendorName) {
+        Response response = ContractApiV2.createContractWithParams(
+                vendorId,
+                "test_contract_" + vendorId,
+                1753122600000L,
+                1785436200000L,
+                "LTL",
+                "PER_TRIP",
+                "LONG_TERM",
+                "JNP123",
+                "ISPAT_GGN",
+                700.0,
+                "Flat",
+                12,
+                "hours",
+                vendorName,
+                389,
+                38,
+                38,
+                false
+        );
+        
+        Assertions.assertStatusCode(200, response);
+        Assertions.assertIfNotNull("Response", response);
+    }
+    
+    /**
+     * Test contract creation with is_submit=true
+     */
+    @Test
+    public void testContractCreationWithIsSubmitTrue() {
+        Response response = ContractApiV2.createContractWithParams(
+                "SIN9393",
+                "test_contract_submit_true",
+                1753122600000L,
+                1785436200000L,
+                "LTL",
+                "PER_TRIP",
+                "LONG_TERM",
+                "JNP123",
+                "ISPAT_GGN",
+                700.0,
+                "Flat",
+                12,
+                "hours",
+                "singh transporter pvt ltd",
+                389,
+                38,
+                38,
+                true
+        );
+        
+        Assertions.assertStatusCode(200, response);
+        Assertions.assertIfNotNull("Response", response);
+    }
+    
+    /**
+     * Test contract creation with is_submit=false
+     */
+    @Test
+    public void testContractCreationWithIsSubmitFalse() {
+        Response response = ContractApiV2.createContractWithParams(
+                "SIN9393",
+                "test_contract_submit_false",
+                1753122600000L,
+                1785436200000L,
+                "LTL",
+                "PER_TRIP",
+                "LONG_TERM",
+                "JNP123",
+                "ISPAT_GGN",
+                700.0,
+                "Flat",
+                12,
+                "hours",
+                "singh transporter pvt ltd",
+                389,
+                38,
+                38,
+                false
+        );
+        
+        Assertions.assertStatusCode(200, response);
+        Assertions.assertIfNotNull("Response", response);
+    }
+} 

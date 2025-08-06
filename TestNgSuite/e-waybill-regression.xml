@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="E-WayBill Regression" parallel="tests" thread-count="500">
+    <test name="WayBill RS  Edit" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ewaybill.edit.EWayBIllEditAPI"/>
+        </classes>
+    </test>
+
+    <test name="E-WayBill Rest" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ewaybill.edit.EWayBillRestAPI"/>
+        </classes>
+    </test>
+    <test name="E-WayBill Internal" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ewaybill.edit.EWayBillRestInternalAPI"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,10 @@
+{
+  "data": {
+    "otp_generation": "client_generated",
+    "max_pick_up_tat": 11,
+    "b2b_serviceability_type": "voltas",
+    "use_bird_service": false,
+      "cq_phone": "007",
+      "restrict_weight_srv": false
+  }
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CMU Regression 2" parallel="tests" thread-count="400">
+
+    <!-- Catfight2 Tests Done-->
+    <test name="Catfight cases" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.RegressionScripts.Catfight"/>
+        </classes>
+    </test>
+
+    <!-- Catfight2 Tests Done-->
+    <test name="Catfight2 cases" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.RegressionScripts.Catfight2"/>
+        </classes>
+    </test>
+
+    <!--Mapper test cases Done -->
+    <test name="Update cn mapper cases" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.RegressionScripts.Mapper"/>
+        </classes>
+    </test>
+
+    <!--Mapper1 test cases Done -->
+    <test name="Update cn mapper1 cases3" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.RegressionScripts.Mapper1"/>
+        </classes>
+    </test>
+
+    <!--Mapper2 test cases Done -->
+    <test name="Update cn mapper2 cases2" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.RegressionScripts.Mapper2"/>
+        </classes>
+    </test>
+
+    <!--RT_Mapper test cases  Done-->
+    <test name="Return mapper cases" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.RtMapper.RT_Mapper"/>
+        </classes>
+    </test>
+
+    <!--RT_Mapper2 test cases  Done-->
+    <test name="Return mapper2 cases" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.RtMapper.RT_Mapper2"/>
+        </classes>
+    </test>
+
+    <!--RT_Mapper3 test cases  Done-->
+    <test name="Return mapper3 cases" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.RtMapper.RT_Mapper3"/>
+        </classes>
+    </test>
+
+    <!--RT_Mapper3 test cases  Done-->
+    <test name="Return mapper4 cases" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.RtMapper.RT_Mapper4"/>
+        </classes>
+    </test>
+
+    <!--RT_Mapper5 test cases  Done-->
+    <test name="Return mapper5 cases" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.RtMapper.RT_Mapper5"/>
+        </classes>
+    </test>
+
+    <!--RT_Mapper6 test cases  -->
+    <test name="Return mapper6 cases" group-by-instances="true" parallel="methods">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.RtMapper.RT_Mapper6"/>
+        </classes>
+    </test>
+
+</suite>

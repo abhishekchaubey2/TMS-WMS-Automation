@@ -1,0 +1,24 @@
+package com.delhivery.Express.pojo.ClientDetailsFetch.Request;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+"client"
+})
+
+@Builder
+@Getter
+@Setter
+public class FetchClientDetailsRequestPayload {
+
+	@JsonProperty("client")
+	public String client;
+
+}

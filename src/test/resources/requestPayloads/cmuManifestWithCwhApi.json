@@ -1,0 +1,51 @@
+{
+  "pickup_location": {
+    "name": "HQAPIREGRESSION"
+  },
+  "shipments": [
+    {
+      "lrn": "",
+      "name": "test",
+      "client": "HQAPIREGRESSION",
+      "waybill": "",
+      "order": "jp4DfnQJ9kLXqPEs",
+      "products_desc": "",
+      "order_date": "",
+      "payment_mode": "COD",
+      "cod_amount": 12,
+      "mps_amount": 0,
+      "product_type": "B2C",
+      "package_count": 1,
+      "total_amount": 1234,
+      "add": "test",
+      "city": "",
+      "state": "",
+      "country": "",
+      "phone": "6000000001",
+      "pin": "122001",
+      "dangerous_good": false,
+      "return_add": "",
+      "return_city": "",
+      "return_country": "",
+      "return_name": "",
+      "return_phone": "",
+      "return_pin": "",
+      "return_state": "",
+      "supplier": "",
+      "billable_weight": 1,
+      "dimensions": "",
+      "volumetric": 12,
+      "client_gst_tin": "",
+      "consignee_gst_tin": "",
+      "hsn_code": "",
+      "invoice_reference": "",
+      "seller_gst_tin": "",
+      "weight": "",
+      "shipping_method": "Surface",
+      "weight_verification": false,
+      "essential_good": false,
+      "international": ""
+    }
+  ],
+  "dispatch_date": ""
+}

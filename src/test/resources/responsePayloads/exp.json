@@ -1,0 +1,10 @@
+{
+  "data": {
+    "otp_generation": "client_generated",
+    "max_pick_up_tat": 0,
+    "b2b_serviceability_type": null,
+    "use_bird_service": true,
+      "cq_phone": "8802033732",
+      "restrict_weight_srv": false
+  }
+}

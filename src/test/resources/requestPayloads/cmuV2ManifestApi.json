@@ -1,0 +1,50 @@
+{
+  "shipments": [{
+    "pin": "400059",
+    "invoices": [{
+      "amount": 51,
+      "ewaybill": "",
+      "invoice": "INV56783456590001"
+    }],
+    "order_info": [{
+      "shipment_length": 1,
+      "shipment_width":2,
+      "shipment_height":2,
+      "order": "ABCD_1",
+      "waybill": "4737414479241",
+      "products_desc": "Hello World"
+    },
+      {
+        "shipment_length":1,
+        "shipment_width":3,
+        "shipment_height":3,
+        "order": "ABCD_1",
+        "waybill": "4737414479252",
+        "products_desc": "Hello World"
+      }],
+    "weight": 0,
+    "lrn": "111111111",
+    "phone": "8527167997",
+    "payment_mode": "COD",
+    "mps_children": 2,
+    "name": "Test_name",
+    "city": "Mumbai",
+    "cod_amount": 51,
+    "mps_amount":51,
+    "country": "India",
+    "state": "Maharashtra",
+    "add": "tfxhsat",
+    "product_type":"B2C",
+    "return_add": "test",
+    "return_city": "new delhi",
+    "return_country": "IN",
+    "return_name": "",
+    "return_phone": "6000000001",
+    "return_pin": "122001",
+    "shipping_method":"Surface"
+
+  }],
+  "pickup_location": {
+    "name": ""
+  }
+}

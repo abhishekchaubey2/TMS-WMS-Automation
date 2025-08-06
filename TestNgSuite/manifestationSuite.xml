@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Manifestation Regression" parallel="tests" thread-count="80">
+    <test name="Manifestation" group-by-instances="true">
+        <classes>
+			<class name="com.delhivery.Express.testModules.ManifestationService.ManifestationService" />
+		</classes>
+    </test>
+    <test name="Manifestation2" group-by-instances="true">
+        <classes>
+			<class name="com.delhivery.Express.testModules.ManifestationService.ManifestationService2" />
+		</classes>
+    </test>
+    <test name="Manifestation3" group-by-instances="true">
+        <classes>
+			<class name="com.delhivery.Express.testModules.ManifestationService.ManifestationService3" />
+		</classes>
+    </test>
+    <test name="Manifestation4" group-by-instances="true">
+        <classes>
+			<class name="com.delhivery.Express.testModules.ManifestationService.ManifestationService4" />
+		</classes>
+    </test>
+    <test name="Manifestation5" group-by-instances="true">
+        <classes>
+			<class name="com.delhivery.Express.testModules.ManifestationService.ManifestationService5" />
+		</classes>
+    </test>
+
+    
+</suite>

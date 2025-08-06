@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Manifestation Regression" parallel="tests" thread-count="80">
+    <test name="Manifestation6" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ManifestationService.ManifestationService6" />
+        </classes>
+    </test>
+    <test name="Manifestation7" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ManifestationService.ManifestationService7" />
+        </classes>
+    </test>
+    <test name="Manifestation8" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ManifestationService.ManifestationService8" />
+        </classes>
+    </test>
+    <test name="Manifestation9" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ManifestationService.ManifestationService9" />
+        </classes>
+    </test>
+    <test name="Manifestation10" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ManifestationService.ManifestationService10" />
+        </classes>
+    </test>
+    <test name="BuisnessFlows" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ManifestationService.BuisnessFlows" />
+        </classes>
+    </test>
+    <test name="BuisnessFlows2" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ManifestationService.BuisnessFlows2" />
+        </classes>
+    </test>
+
+</suite>

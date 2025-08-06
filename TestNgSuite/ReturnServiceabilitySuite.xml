@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CMU Regression" parallel="tests" thread-count="40">
+    <test name="OriginCenterReturnServiceability" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.OriginCenterReturnServiceability"/>
+        </classes>
+    </test>
+    <test name="OriginCenterReturnServiceability2" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.OriginCenterReturnServiceability2"/>
+        </classes>
+    </test>
+    <test name="OriginCenterReturnServiceability3" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.OriginCenterReturnServiceability3"/>
+        </classes>
+    </test>
+    <test name="PincodeReturnServiceability" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.PincodeReturnServiceability"/>
+        </classes>
+    </test>
+    <test name="PincodeReturnServiceability2" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.PincodeReturnServiceability2"/>
+        </classes>
+    </test>
+    <test name="PincodeReturnServiceability3" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.PincodeReturnServiceability3"/>
+        </classes>
+    </test>
+    <test name="PincodeReturnServiceability4" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.PincodeReturnServiceability4"/>
+        </classes>
+    </test>
+    <test name="ClientWarehouseReturnAddressReturnServiceability" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.ClientWarehouseReturnAddressReturnServiceability"/>
+        </classes>
+    </test>
+    <test name="ClientWarehouseReturnAddressReturnServiceability2" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.ClientWarehouseReturnAddressReturnServiceability2"/>
+        </classes>
+    </test>
+    <test name="ClientWarehouseReturnAddressReturnServiceability3" group-by-instances="true">
+        <classes>
+            <class name="com.delhivery.Express.testModules.ReturnServiceabilityService.ClientWarehouseReturnAddressReturnServiceability3"/>
+        </classes>
+    </test>
+</suite>

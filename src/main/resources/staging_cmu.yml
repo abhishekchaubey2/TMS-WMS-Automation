@@ -1,0 +1,676 @@
+TestFile:
+   cmu: 
+      filepath: ./src/main/resources/cmu.xls
+      cmu_sheet : cmu
+      ewbn_sheet: ewbn
+      pkgFlowApi_sheet: pkgFlowApis 
+   APITestData:
+      filepath: /resources/testData/APITestData.xls
+      manifest_sheet: manifestation
+      ewaybillService_sheet: ewaybill_service
+      pkgFlowApi_sheet: pkgflowAPIs
+      hqApi_sheet: hqAPIs
+      hqPiiApi_sheet: HQ_PII_Apis
+      
+Ewaybill_Service:
+   filepath: ./resources/ewaybill_Data/
+   generated_ewbns: generated_ewbns
+   
+Centers:
+   Gurgaon:
+      city: Gurgaon
+      State: Haryana
+      Name: Gurgaon (Haryana)
+      SortCode: IND122001AAB
+   Mumbai_MIDC:
+      Name: Mumbai MIDC (Maharashtra)
+      SortCode: IND400093AAA
+      city: Mumbai
+   Del_Okhla_PC:
+      Name: Del_Okhla_PC (Delhi)
+      city: Delhi
+      SortCode: IND110044AAB
+   mum:
+      Name: mum (Maharashtra)
+   Test-HQ1:
+      Name: Test-HQ1 (Haryana) 
+   East_Delhi:
+      Name: East Delhi (Delhi)
+      city: Delhi
+      SortCode: IND110092AAB
+   BD_Dhaka_Banani_D:
+      Name: BD_Dhaka_Banani_D (Dhaka)
+      city: Dhaka
+      SortCode: BD1400A1A
+   OK_RPC:
+      Name: OK_RPC (Delhi)
+      city: Delhi
+      SortCode: IND110020AAB
+   GGN_SC:
+      Name: GGN_SC (Haryana)
+      city: Gurgaon
+      SortCode: INHRABDK
+   Rudrapur_UdhamNgr_L:
+      Name: Rudrapur_UdhamNgr_L (Uttarakhand)
+      city: Rudrapur
+      SortCode: IND263153AAC
+   Surat_Varachha_DC:
+      Name: Surat_Varachha_DC (Gujarat)
+      city: Surat
+      SortCode: IND395006AAA
+
+Client_Details:
+   client_99labels:
+      name: 99labels
+      token: fd4fdef7b37974c04107b9fd79987b91a63ed98d
+      client_warehouse: 99labels
+      client_uuid: a118231a-bbb0-11e6-a4e0-0266029ab815
+   client_DEVANGLIFE:
+      name: DEVANGLIFE
+      token: cf2ca0ec41d2df2d526bd79248adebc180f23dda
+      client_warehouse: Ewbn_test
+      client_uuid: cms::client::df04c258-186e-11e7-8398-0266029ab815
+   client_WayBillAsService:
+      name: WayBillAsService
+      token: c60aa1e6a9de601d69b680158f9e066e28456ad3
+      client_warehouse: Ewbn_test WAAS
+      client_uuid: cms::client::b05df00c-e946-11e6-ba63-0266029ab815
+   client_AMAZON:
+      name: AMAZON
+      token: fcfeb6f5b4d364c7a80eeaa72b9c20cce54a6743
+      client_warehouse: AMAZON Test
+      client_uuid: cms::client::c43654e6-186e-11e7-8398-0266029ab815
+   client_FLIPKART B2B:
+      name: FLIPKART B2B
+      token: 51eb2a687c74d1a71531bf21e8e8ee465df0110e
+      client_warehouse: Flipkart b2b HS
+      client_uuid: cms::client::81d2159e-a784-11e8-8105-022153c77ac2
+   client_AMAZONINDIA:
+      name: AMAZONINDIA
+      token: c52875c5e2bac6d24b21e78892f918efb675907e
+      client_warehouse: Amazon test warehouse
+      client_uuid: cms::client::cf90f4e0-186e-11e7-8398-0266029ab815
+   client_Flipkart:
+      name: Flipkart
+      token: 8ae9c84d76c85075ac857d0200f3c9da993dc5fa
+      client_warehouse: Flipkart
+      client_uuid: bf088cec-b7ab-11e6-bd05-0266029ab815
+   client_99tshirts:
+      name: 99tshirts
+      token: 0f9d5d8253ba145b6cfed882fc3bb610324d6ee8
+      client_warehouse: FCDEL1
+      client_uuid: cms::client::2ca5e36f-8f1c-11e8-a553-0e7d6cbd51ec
+   client_HQAPIREGRESSION:
+      name: HQAPIREGRESSION
+      token: 6f96430ad3a07c89cbf46eed7b57ae3a800fe25f
+      client_warehouse: HQAPIREGRESSION
+      client_BD_warehouse: HQ Regression BD
+      client_uuid: cms::client::e9f55bcb-ba94-11ea-a42e-0e1ed20d7515
+      cwh_uuid: delhivery::clientwarehouse::f83ade0a-493d-4dd8-b2b3-bf15739e19f4
+      BD_cwh_uuid: delhivery::clientwarehouse::7d5a0b12-02fe-4fce-946f-c602d87333e7
+   client_TESTclienthQdemo:
+      name: TESTclienthQdemo
+      token: a68730a49a7b1085c923e002e2a095c553085ec5
+      client_warehouse: TESTclienthQWarehouse
+      client_uuid: cms::client::66c851bc-75c0-11ea-b602-02ad8b3385c0
+   client_DelphiB2C-B2C:
+      name: DelphiB2C-B2C
+      token: 35fcc48a024e56b627193ff1011a611ef73d91ab
+      client_warehouse: HERR WIESECKE B2C NEW24-2510111800-RCSE17
+      client_uuid: cms::client::36113a71-c9bb-11eb-8898-02246f2c85ef
+   client_Delphi-Import-B2C:
+      name: Delphi-Import-B2C
+      token: d7cdd1034a0f1a9cce986008bf037e537b1d05d0
+      client_warehouse: footballone
+      client_uuid: cms::client::92e9bc07-cdce-11eb-b68e-0e581a8e4ec7
+   client_FTPL:
+      name: FTPL
+      token: 684567261605fea54ebe31cef1e2cba4461f225b
+      client_warehouse: FTPL
+      client_uuid: cms::client::82ebaca6-0702-11e8-86c7-063fe3a3465a
+   client_HQAPIREGRESSION SRV:
+      name: HQAPIREGRESSION SRV
+      token: 1b465f442643309896e0e088d28a73d23c333f67
+      client_uuid: cms::client::9a7164e-1bd311ea-u8811a-001675153011
+      client_warehouse: HQAPIREGRESSION SRV
+      cwh_uuid: delhivery::clientwarehouse::b86716e8-c07d-44b6-b10b-f7be76aba141
+   client_HQREGRESSION SRV11:
+      name: HQREGRESSION SRV11
+      token: dccc6945dc478d390d5d47395aa2c2f5defec89c
+      client_uuid: cms::client::blul0343-2a9d-11eb-a545-0254207c8a79
+   client_HQREGRESSION SRV12:
+      name: HQREGRESSION SRV12
+      token: 0d07db1031f699c4a5e4161ef6d6562a0dac91d8
+      client_uuid: cms::client::blul0343-2a9d-11ab-a545-0254207c8a79	
+   client_HQREGRESSION SRV14:
+      name: HQREGRESSION SRV14
+      token: 138ac4c45171191c2a85666d4f3bc292432bd08d
+      client_uuid: cms::client::blul1343-2a3d-11ab-a545-0254207c8a79
+   client_HQAPIREGRESSION Restrict Mapper:
+      name: HQAPIREGRESSION Restrict Mapper
+      token: a8092930f9a7d49c0e63d9ef49e7b6d0a7cc0017
+      client_uuid: cms::client::9a7164e-1bd311ea-u8811a-001676369544
+      client_warehouse: HQAPIREGRESSION Restrict Mapper
+      cwh_uuid: delhivery::clientwarehouse::3db52952-e529-4636-aeac-2b8c0dfddbb1
+   client_Delhivery E POD:
+      name: Delhivery E POD
+      token: 131ea7f33636df5728b52dae0a28d1b2ec933019
+      client_uuid: cms::client::94f842ba-8b54-11e9-8bff-02ad8b3385c0
+      client_warehouse: Delhivery E POD
+      cwh_uuid: delhivery::clientwarehouse::38a86689-878c-415b-abd3-dca9618789e2
+   client_HQAPIREGRESSION SRV CUSTOM:
+      name: HQAPIREGRESSION SRV CUSTOM
+      jwtname: HQAPIREGRESSIONSRVCUSTOM
+      token: ec187869fe9e9de00f4e64b5095acb32381b40e7
+      client_uuid: cms::client::5fb31a95-aeb9-11ed-88b1-0ef84914eac1
+      client_warehouse: HQAPIREGRESSION SRV CUSTOM
+      cwh_uuid: delhivery::clientwarehouse::9b448fd8-91b4-4531-99f1-92f94d4ab54e
+      password: Welcome@123
+   client_HQAPIREGRESSION Ret Add OC:
+      name: HQAPIREGRESSION Ret Add OC
+      token: 77c2dd19c7532b9e2544ec8c3991dda8b5e3508b
+      client_uuid: cms::client::9a7164e-1bd311ea-u8811a-001676977825
+      client_warehouse: HQAPIREGRESSION Ret Add OC
+      cwh_uuid: delhivery::clientwarehouse::a2509abb-33d1-4674-8a17-d695c5d0f517
+      client_warehouse1: HQAPIREGRESSION Ret Add OC01
+      cwh_uuid1: delhivery::clientwarehouse::407dee01-4da1-4347-a783-9be0f4ee5a20
+   client_HQAPIREGRESSION RetAdd OC ND:
+      name: HQAPIREGRESSION RetAdd OC ND
+      token: 2a9e08d3f0f8b8ec16752322ecedebd37ce2e9d4
+      client_uuid: cms::client::7bb28735-b369-11ed-bffd-0233fdd64d4f
+      jwtname: HQAPIREGRESSIONRetAddOCND
+      password: Welcome@123
+      client_warehouse: HQAPIREGRESSION RetAdd OC ND
+      cwh_uuid: delhivery::clientwarehouse::fce69043-f7e4-4f14-8722-9c9f37df7605
+   client_HQAPIREGRESSIONCWH:
+      name: HQAPIREGRESSIONCWH
+      token: 385cfa20d74c7867a28c9f1bafae49331e97ad49
+      client_uuid: cms::client::98f50d2d-b75f-11ed-b9e8-021d5903374d
+      jwtname: HQAPIREGRESSIONCWH
+      password: Welcome@123
+      client_warehouse: HQAPIREGRESSIONCWH
+      cwh_uuid: delhivery::clientwarehouse::7c7eef05-4dc0-4344-b0e9-f775510d91a5
+   client_HQAPIREGRESSION Ret Add Rt Cwh:
+      name: HQAPIREGRESSION Ret Add Rt Cwh
+      token: 99433d1e8727cff9fd66a67db9a39c82681db87a
+      client_uuid: cms::client::9719a549-b8d2-11ed-8255-02b8437e662f
+      jwtname: HQAPIREGRESSIONRetAddRtCwh
+      password: Welcome@123
+      client_warehouse: HQAPIREGRESSION Ret Add Rt Cwh
+      cwh_uuid: delhivery::clientwarehouse::bba9fcac-0129-43b3-b4fc-30969bc0d293
+      client_warehouse1: HQAPIREGRESSION Ret Add Rt Cwh01
+      cwh_uuid1: delhivery::clientwarehouse::f805101a-c056-4f22-905a-9f9ee1538556
+   client_1MG:
+      name: 1MG
+      token: cd9ef0946024bb1e39a0a8ca509ce800832f96b5
+      client_uuid: cms::client::c1fe9d2c-54d2-11e8-a4f1-063fe3a3465a
+      client_warehouse: Cwh_quirky
+      cwh_uuid: delhivery::clientwarehouse::914809ba-f9ab-4cb6-9926-18cf6d6758af
+   client_HQAPIREGRESSION INVALID:
+      name: HQAPIREGRESSION
+      token: testing12345
+      client_warehouse: HQAPIREGRESSION
+      client_BD_warehouse: HQ Regression BD
+      client_uuid: cms::client::e9f55bcb-ba94-11ea-a42e-0e1ed20d7515
+      cwh_uuid: delhivery::clientwarehouse::f83ade0a-493d-4dd8-b2b3-bf15739e19f4
+   client_AramexDomestic:
+      name: AramexDomestic
+      token: 2ebc117179a417285a35d43400c43773e9d8f8d7
+      client_warehouse: AramexDomestic
+      client_uuid: cms::client::d4117016-31d6-11e9-b78a-02ad8b3385c0
+   client_Paytm:
+      name: Paytm
+      token: b359396eb944e042c938b9a2f7450e8bf2d6664a
+      client_warehouse: Paytm
+      client_uuid: cms::client::12f7bd7c-186f-11e7-8398-0266029ab815
+   client_ManifestClient:
+      name: ManifestClient
+      token: abd2c1aaf6cf9be6e9ec55972c87fb6848b0de6e
+      client_uuid: cms::client::b77b4ca4-ff24-11eb-9caf-0gdewiufgewuift
+      wallet_id: a64c4de2-8e9f-11ee-b8fd-120f7bc5b96b
+   client_URBANICEXPRESS-B2C:
+      name: URBANICEXPRESS-B2C
+      token: aae6f03d2f7720deee9cd2843f044c8013a46a50
+      client_warehouse: URBANIC EXPRESS
+      client_uuid: cms::client::3652013f-b4bc-11ed-b7c7-0258c737bb4b
+   client_SBI CARDS:
+      name: SBI CARDS
+      token: d9693c48076b532f8a77ea12147c919c969ae550
+   client_HQMANIFESTCLIENT:
+     name: HQMANIFESTCLIENT
+     token: deb50da73b85dd32fa00260e01faf2fe2a8997eb
+     client_uuid: cms::client::17s1ca8e36f-9f1c-231e8-a569-0e7d6cbd38ec
+
+#qahq is internal user having all permissions to call internal APIs
+User:
+   client_internal:
+      name: qahq
+      token: 855025236aadcd9dbc08eb8fee6fbd4f61c7ab9f
+      password: Delhivery@123123
+   client_DEVANGLIFE:
+      name: qabrijesh
+      password: Brijesh@98765432
+   client_99labels:
+      name: 99labels
+      password: Ums@123123
+   help_support:
+      name: hs_package_token_dev
+      token: b1ce04e0251685d0d6c87c923881e2b77e8de4dd
+   staffUserWithoutPermission:
+      name: HQApiNoPermStaffUs-1663839818
+      password: Delhivery@123
+   client_HQAPIREGRESSION:
+      name: HQAPIREGRESSION
+      password: Delhivery@11223345
+   client_FTPL:
+      name: FTPL
+      password: Delhivery@1234
+      
+   
+ClientWarehouses:
+   DEVANGLIFE:
+      name: DEVANGLIFE
+      id: acd50cbc-5732-4fc7-8386-46600dbf9d94 
+   DEVANG-AsegTest:
+      name: DEVANG-AsegTest
+      id: 451894c6-a57f-4028-8a13-64135913bc33
+
+nsl:
+   DLYLH_105:
+      name: DLYLH-105
+   L_FIN:
+      name: L-FIN
+   U_FIN:
+      name: U-FIN
+   Doubt:
+      name: DLYDC-109
+   selfC:
+      name: X-SC
+   RT_101:
+      name: RT-101
+
+packageFlowScans:
+   manifestation:
+      statusType: UD
+      scanStatus: Manifested
+      scanNsl: X-UCI
+   fmPick:
+      statusType: UD
+      scanStatus: In Transit
+      scanNsl: X-PPOM
+   fmDepart:
+      statusType: UD
+      scanStatus: In Transit
+      scanNsl: FMDEPART-101
+   genericIncomingAtOrigin:
+      statusType: UD
+      scanStatus: In Transit
+      scanNsl: X-PIOM
+   createBag:
+      statusType: UD
+      scanStatus: In Transit
+      scanNsl: X-DBL1F
+   addBagToTrip:
+      statusType: UD
+      scanStatus: In Transit
+      scanNsl: X-DLL2F
+   removeBagFromTrip:
+      statusType: UD
+      scanStatus: In Transit
+      scanNsl: X-OLL2F
+   removePkgFromBag:
+      statusType: UD
+      scanStatus: In Transit
+      scanNsl: X-PREMB
+   tripIncoming:
+      statusType: UD
+      scanStatus: In Transit
+      scanNsl: X-ILL2F
+   bagIncoming:
+      statusType: UD
+      scanStatus: In Transit
+      scanNsl: X-ILL1F
+   genericIncomingAtDestination:
+      statusType: UD
+      scanStatus: Pending
+      scanNsl: X-IBD3F
+   shipmentDispatched:
+      statusType: UD
+      scanStatus: Dispatched
+      scanNsl: X-DDD3FD
+   shipmentDelivered:
+      statusType: DL
+      scanStatus: Delivered
+      scanNsl: EOD-38
+   DocumentMissing:
+      statusType: UD
+      scanStatus: In Transit
+      scanNsl: DLYLH-145
+bagFlowScans:
+   createBag:
+      scanStatus: In Transit
+      scanAct: +S
+   addBagToTrip:
+      scanStatus: In Transit
+      scanAct: +L
+   removeBagFromTrip:
+      scanStatus: In Transit
+      scanAct: -L
+   removePkgFromBag:
+      scanStatus: Discarded
+      scanAct: None
+   tripIncoming:
+      scanStatus: In Transit
+      scanAct: <L
+   bagIncoming:
+      scanStatus: Pending
+      scanAct: <B
+   genericIncomingAtDestination:
+      scanStatus: Complete
+
+productionData:
+   client_DLV Internal Test:
+      name: DLV Internal Test
+      token: d1af61349edc6660809ac6d3d7cf3f52bcae8c90
+      client_warehouse: DLVInternal
+      client_uuid: cms::client::6fa62bc8-59c4-4796-ac68-496d584e4581
+      cwh_uuid: delhivery::clientwarehouse::679a7084-0566-11e7-a7e3-02c88a5f8bef
+   Gurgaon_WaletVTL_D:
+      Name: Gurgaon_WaletVTL_D (Haryana)
+      SortCode: IND122103AAA
+      city: Gurgaon
+   Dummy_Walet_VTL:
+      Name: Dummy_Walet_VTL (Maharashtra)
+      SortCode: INMHABBE
+      city: Mumbai
+   Dummy_Walet_VTL3:
+      Name: Dummy_Walet_VTL3 (Maharashtra)
+      SortCode: INMHAMXU
+      city: Mumbai
+   Dummy_Mumbai_WaletVTL:
+      Name: Dummy_Mumbai_WaletVTL (Maharashtra)
+      SortCode: IND400059AAB
+      city: Mumbai
+
+OdTatData:
+    City:
+       Gurgaon: Gurgaon
+       Delhi: Delhi
+       Mumbai: Mumbai
+    TatData_Gurgaon_Delhi:
+       Data: 
+        ltl_air_tat: 1
+        rvp_air_tat: 4
+        rvp_air_cutoff: "23:59:59"
+        forward_fast_b2b_cutoff: "15:59:59"
+        ltl_regular_tat: 1
+        forward_fast_b2c_cutoff: "13:59:59"
+        forward_surface_cutoff: "23:59:59"
+        heavy_cutoff: "23:59:59"
+        id: null
+        origin_city: Gurgaon
+        forward_express_cutoff: "23:59:59"
+        destination_city: Delhi
+        flash_air_tat: 4
+        heavy_tat: 4
+        forward_fast_b2b_tat: 1
+        return_cutoff: "23:59:59"
+        next_b2c_surface_cutoff: "23:59:59"
+        ltl_air_cutoff: "23:59:59"
+        dto_tat: 4
+        ltl_regular_cutoff: "23:59:59"
+        air_lane_exists: false
+        return_tat: 2
+        dto_cutoff: "23:59:59"
+        forward_fast_b2c_tat: 1
+        flash_air_cutoff: "23:59:59"
+        next_b2c_surface_tat: 1
+        forward_express_tat: 1
+        forward_surface_tat: 5
+
+Item:
+  cookware_item:
+    list:
+     - description: "Crystal CLASSIC Series Cookware Set"
+       brand: "Crystal CLASSIC Series Cookware Set"
+       ean: "null"
+       si: "null"
+       imei: "null"
+       reason: "test"
+       images: "http://img.fkcdn.com/image/350/200/k5h2jrk0/cookware-set/v/k/y/8901200900416-cns-884a-crystal-original-imafz5gxwtctg4hg.jpeg, http://img.fkcdn.com/image/350/200/k5h2jrk0/cookware-set/v/k/y/8901200900416-cns-884a-crystal-original-imafz5gxwtctg4hg.jpeg"
+       serial: "null"
+       p_cat: "cookware_set"
+       item_quantity: "1"
+
+     - description: "Crystal CLASSIC Series Cookware Set"
+       brand: "Crystal CLASSIC Series Cookware Set"
+       ean: "null"
+       si: "null"
+       imei: "null"
+       reason: "test"
+       images: "http://img.fkcdn.com/image/350/200/k5h2jrk0/cookware-set/v/k/y/8901200900416-cns-884a-crystal-original-imafz5gxwtctg4hg.jpeg, http://img.fkcdn.com/image/350/200/k5h2jrk0/cookware-set/v/k/y/8901200900416-cns-884a-crystal-original-imafz5gxwtctg4hg.jpeg"
+       serial: "null"
+       p_cat: "cookware_set"
+       item_quantity: "1"
+       
+TestData:
+   ManifestData:
+      SMS_Phone_Number: "9617113651"
+   
+SmsTemplates:
+   FM_Pickup_SMS:
+       message: "Your I am seller package with AWB 5265167462955 has been picked up.track here https://www.delhivery.com/track/#/package/5265167462955 - Delhivery"
+   QC_Failed:
+       message: "Your I am seller package with AWB 5265167462874 has failed the Quality check and has not been picked -Delhivery"
+   QC_Successful:
+       message: "Your I am seller package with AWB 5265167462896 has passed the Quality check and has been picked up -Delhivery"
+   Out_For_Pickup:
+       message: "To initiate PICKUP of ManifestClient p from ManifestClient (AWB wbn),share OTP 6189. Track@ appdelhivery.page.link/rvpqc -Delhivery"
+   Pickup_Successful:
+       message: "PRODUCT_DESCRIPTION_SHOULD_BE_ from 99labels (AWB wbn) is picked successfully. Track at appdelhivery.page.link/rvp -Delhivery"
+   Out_For_Delivery:
+       message: "ManifestClient package from ManifestClient (AWB 6780211017295) is out for delivery. Share OTP 8622. Track & call agent@ appdelhivery.page.link/ofd -Delhivery"
+   BANK_Out_For_Delivery:
+       message: "Your SBI Card sent via Delhivery Reference No 1636794970 will be attempted today. Pls provide this Delivery Authentication Code 7478 - Delhivery"
+
+
+ManifestationData:
+   name: Test
+   client: HQAPIREGRESSION
+   waybill: ""
+   productsDesc: "tshirts"
+   orderDate: 2023-10-31T16:01:18.116
+   paymentMode: Prepaid
+   codAmount: 100
+   productType: B2C
+   mpsAmount: 100
+   packageCount: 1
+   totalAmount: 1000
+   add: Test Address
+   city: Gwalior
+   state: Madhya Pradesh
+   country: India
+   phone: 9617113651
+   pin: 474010
+   returnAdd: test return address
+   returnCity: Delhi
+   returnCountry: India
+   returnName: Name
+   returnPhone: 9425112394
+   returnPin: 110010
+   returnState: Delhi
+   supplier: abc
+   billableWeight: 100
+   taxValue: abc
+   taxationType: B2B
+   fragileShipment: true
+   documentNumber: 234567891234
+   ewbn: 171002253775
+   source: api
+   shippingMode: Surface
+   secondaryAdd: second address
+   secondaryCity: Indore
+   secondaryState: Madhya Pradesh
+   weightVerification: true
+   essentialGood: true
+   email: abc@gmail.com
+   weight: 20
+   invoiceUrl: abc
+   quantity: 1
+   sellerName: TestSeller
+   sellerAdd: Test Seller Address
+   sellerCity: Gwalior
+   sellerState: Madhya Pradesh
+   sellerCst: "test Cst"
+   sellerTin: 27AAECB6555G1ZL
+   sellerInv: "Test inv"
+   sellerInvDate: "2023-10-31T16:01:18.116"
+   shipmentLength: 22.4
+   shipmentWidth: 22.4
+   shipmentHeight: 22.4
+   consigneeTin: 27AAECB6555G1ZL
+   commodityValue: 100
+   categoryOfGoods: abc
+   dangerousGoods: true
+   shipmentType: MPS
+   sellerGstTin: 27AAECB6555G1ZL
+   clientGstTin: 27AAECB6555G1ZL
+   consigneeGstTin: 27AAECB6555G1ZL
+   hsncode: 12345678
+   invoiceReference: abc
+   odDistance: 25.6
+   billingName: test name
+   countryCode: IN
+   clearanceMode: DDU
+   fmAddress: Test Fm address
+   fmPhone: 9617113651
+   fmPin: 110010
+   transportSpeed: 60
+   masterId: 1234
+   pickupStartTime: 2023-10-31T16:01:18.116
+   pickupEndTime: 2023-10-31T16:01:18.116
+   pickupSlotCode: 2023-10-31T16:01:18.116
+   dropEndTime: 2023-10-31T16:01:18.116
+   dropSlotCode: 2023-10-31T16:01:18.116
+   dropStartTime: 2023-10-31T16:01:18.116
+   serviceType: 30-minutes
+   shippingMethod: Surface
+   salesTaxFormAckNo: abc
+   mpsChildren: 1
+   mpsWeight: 10
+   mpsVweight: 100
+   masterid: 5134610330890
+   pickupendtime: 2023-10-31T16:01:18.116
+   pickupslotcode: 2023-10-31T16:01:18.116
+   dropstarttime: 2023-10-31T16:01:18.116
+   dropendtime: 2023-10-31T16:01:18.116
+   dropslotcode: 2023-10-31T16:01:18.116
+   producttype: B2C
+   servicetype: 30-minutes
+   timebound: false
+   qualitycheck: false
+   taxationtype: abc
+   fod: abc
+   deliveryDate: 2023-12-31T16:01:18.116
+   nextTrialDate: 2023-12-31T16:01:18.116
+   movementGeography: abc
+   fmMode: abc
+   flowType: abc
+   productCategory: abc
+   speed: abc
+   vas: abc
+   readyToShip: abc
+   internal: abc
+   prime: abc
+   deliveryInstructions: abc
+   lrn: abc
+   qc: abc
+   consigneeGstAmount: abc
+   sellerGstAmount: abc
+   integratedGstAmount: abc
+   gstCessAmount: abc
+   product: abc
+   productDesc: abc
+   productQuantity: abc
+   unit: abc
+   consigneeGstRate: abc
+   sellerGstRate: abc
+   integratedGstRate: abc
+   cessGstRate: abc
+   addressType: abc
+   multiInvAmt: abc
+   codInstructions: abc
+   buybackAddress: abc
+   buybackPin: abc
+   buybackDescription: abc
+   shipOption: abc
+   estimatedArrivalDate: abc
+   shipMethod: abc
+   buybackAmount: abc
+   isSecure: abc
+   personSpecific: abc
+   addressSpecific: abc
+   checkOneSecure: abc
+   otp: abc
+   shipmentCode: abc
+   cc: abc
+   cod: abc
+   customs: abc
+   waiver: abc
+   returnStoreLocation: abc
+   pickupPaymentMode: abc
+   copAmount: abc
+   preferredDays: 2
+   expectedPcount: abc
+   isOtpVerified: abc
+   freightMode: abc
+   freightCharge: abc
+   landMark: abc
+   addressId: abc
+   customerId: abc
+   international: abc
+   e2eId: abc
+   chequeAdd: abc
+   chequePhone: abc
+   chequeaddress: abc
+   chequephone: abc
+   chequecity: abc
+   chequeCity: abc
+   chequeState: abc
+   chequestate: abc
+   chequePin: abc
+   chequepincode: abc
+   chequeCountry: abc
+   chequecountry: abc
+   supplyType: abc
+   subSupplyDesc: abc
+   transactionType: abc
+   otherValue: abc
+   cessNonAdvolValue: abc
+   cessNonAdvolRate: abc
+   provider: abc
+   hyperlocal: abc
+   plasticPackaging: abc
+   flatRateType: abc
+   holdLocation: abc
+   sameDayClear: abc
+   fmPickupType: abc
+   fmUcid: abc
+   insured: abc
+   hasDocument: abc
+   verifiedAdd: abc
+   einvQr: abc
+   manifestationUser: abc
+   itemDesc: abc
+   invoiceValue: abc
+   supplySubType: abc
+   documentType: abc
+   documentDate: abc
+   billingAdd: abc
+   billingPin: abc
+   supplytype: abc
+   subSupplyType: abc
+   othervalue: abc
+   cessnonadvolvalues: abc
+   isCod: abc
+
