@@ -127,8 +127,14 @@ public class ContractResponsePayload {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class ContractData {
         
+        @JsonProperty("id")
+        private String id;
+        
         @JsonProperty("contractId")
         private String contractId;
+        
+        @JsonProperty("requestId")
+        private String requestId;
         
         @JsonProperty("vendorId")
         private String vendorId;
@@ -172,10 +178,12 @@ public class ContractResponsePayload {
         // Manual constructors since Lombok is not working
         public ContractData() {}
         
-        public ContractData(String contractId, String vendorId, String contractName, Long startDate, Long endDate,
+        public ContractData(String id, String contractId, String requestId, String vendorId, String contractName, Long startDate, Long endDate,
                           String serviceType, String contractType, String requestType, String status,
                           String createdAt, String updatedAt, List<LaneDetail> laneDetails, String remarks, String vendorName) {
+            this.id = id;
             this.contractId = contractId;
+            this.requestId = requestId;
             this.vendorId = vendorId;
             this.contractName = contractName;
             this.startDate = startDate;
@@ -197,7 +205,9 @@ public class ContractResponsePayload {
         }
         
         public static class ContractDataBuilder {
+            private String id;
             private String contractId;
+            private String requestId;
             private String vendorId;
             private String contractName;
             private Long startDate;
@@ -212,8 +222,18 @@ public class ContractResponsePayload {
             private String remarks;
             private String vendorName;
             
+            public ContractDataBuilder id(String id) {
+                this.id = id;
+                return this;
+            }
+            
             public ContractDataBuilder contractId(String contractId) {
                 this.contractId = contractId;
+                return this;
+            }
+            
+            public ContractDataBuilder requestId(String requestId) {
+                this.requestId = requestId;
                 return this;
             }
             
@@ -283,7 +303,7 @@ public class ContractResponsePayload {
             }
             
             public ContractData build() {
-                return new ContractData(contractId, vendorId, contractName, startDate, endDate, serviceType, 
+                return new ContractData(id, contractId, requestId, vendorId, contractName, startDate, endDate, serviceType, 
                                       contractType, requestType, status, createdAt, updatedAt, laneDetails, remarks, vendorName);
             }
         }

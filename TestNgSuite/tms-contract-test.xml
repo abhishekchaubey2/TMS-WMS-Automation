@@ -5,7 +5,14 @@
         <classes>
             <class name="com.delhivery.TMS.controller.ContractTest">
                 <methods>
-                    <include name="testCreateContractWithDynamicIsSubmit"/>
+                    <include name="testCompleteContractLifecycleFlow"/>
+                    <include name="testContractApprovalFlow"/>
+                    <include name="testCompletePostToGetFlow"/>
+                    <include name="testPutContractUpdateWithCustomPayload"/>
+                    <include name="testPutContractUpdateWithSamplePayload"/>
+                    <include name="testCompletePostToPutToGetFlow"/>
+                    <include name="testContractDeactivationFlow"/>
+                    <include name="testContractReactivationFlow"/>
                 </methods>
             </class>
         </classes>
