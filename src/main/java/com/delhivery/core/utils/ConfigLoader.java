@@ -311,6 +311,60 @@ public class ConfigLoader {
     public String getHeavyPinCode() {
         return getProperty("heavy.pin.code", "");
     }
+    
+    // WMS-specific getters
+    public String getWmsBaseUrl() {
+        return getProperty("wms.baseUrl");
+    }
+    
+    public String getWmsAuthEndpoint() {
+        return getProperty("wms.auth.endpoint");
+    }
+    
+    public String getWmsUsername() {
+        return getProperty("wms.username");
+    }
+    
+    public String getWmsPassword() {
+        return getProperty("wms.password");
+    }
+    
+    public String getWmsOrderEndpoint() {
+        return getProperty("wms.order.endpoint");
+    }
+    
+    public String getWmsFcUuid() {
+        return getProperty("wms.fc.uuid");
+    }
+    
+    public String getWmsUserUuid() {
+        return getProperty("wms.user.uuid");
+    }
+    
+    // TMS Authentication getters
+    public String getTmsAuthBaseUrl() {
+        return getProperty("tms.auth.baseUrl");
+    }
+    
+    public String getTmsAuthEndpoint() {
+        return getProperty("tms.auth.endpoint");
+    }
+    
+    public String getTmsAuthClientId() {
+        return getProperty("tms.auth.clientId");
+    }
+    
+    public String getTmsAuthClientSecret() {
+        return getProperty("tms.auth.clientSecret");
+    }
+    
+    public String getTmsAuthAudience() {
+        return getProperty("tms.auth.audience");
+    }
+    
+    public String getTmsAuthTid() {
+        return getProperty("tms.auth.tid");
+    }
 }
 
 

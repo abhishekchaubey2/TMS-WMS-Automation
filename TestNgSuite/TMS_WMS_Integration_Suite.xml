@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="TMS_WMS_Integration_Suite" parallel="false" verbose="1">
+    
+    <!-- TMS and WMS Integration Tests -->
+    <test name="TMS_WMS_Integration_Tests" preserve-order="true">
+        <groups>
+            <run>
+                <include name="TMS_WMS"/>
+                <include name="Integration"/>
+                <include name="WMS"/>
+                <include name="TMS"/>
+            </run>
+        </groups>
+        
+        <classes>
+            <!-- WMS Order Tests -->
+            <class name="com.delhivery.TMS_WMS.testModules.WmsOrderTest">
+                <methods>
+                    <include name="testCreateWmsOrder"/>
+                    <include name="testVerifyOrderInTms"/>
+                    <include name="testCreateDemand"/>
+                    <include name="testCreatePickwave"/>
+                    <include name="testVerifyPickwaveLogs"/>
+                    <include name="testVerifyPickwaveFilters"/>
+                    <include name="testAssignContainerToPicklist"/>
+                    <include name="testVerifyPicklistDetails"/>
+                </methods>
+            </class>
+            
+            <!-- Add more TMS_WMS integration test classes here as they are created -->
+            
+        </classes>
+    </test>
+    
+</suite>

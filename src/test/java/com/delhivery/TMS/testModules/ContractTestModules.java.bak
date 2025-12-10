@@ -1,6 +1,6 @@
 package com.delhivery.TMS.testModules;
 
-import com.delhivery.TMS.api.ContractApiV2;
+import com.delhivery.TMS.api.ContractApi;
 import com.delhivery.TMS.dataprovider.ContractDataProvider;
 import com.delhivery.core.utils.Assertions;
 import io.restassured.response.Response;
@@ -35,7 +35,7 @@ public class ContractTestModules {
             Integer minCharge,
             boolean isSubmit) {
         
-        Response response = ContractApiV2.createContractWithParams(
+        Response response = ContractApi.createContractWithParams(
                 vendorId, contractName, startDate, endDate, serviceType, contractType, requestType,
                 origin, destination, rate, rateType, tat, tatDisplayUnit, vendorName,
                 volumetricCoefficient, minChargableWt, minCharge, isSubmit
@@ -50,7 +50,7 @@ public class ContractTestModules {
      */
     @Test(dataProvider = "contractServiceTypes", dataProviderClass = ContractDataProvider.class)
     public void testContractCreationWithDifferentServiceTypes(String serviceType) {
-        Response response = ContractApiV2.createContractWithParams(
+        Response response = ContractApi.createContractWithParams(
                 "SIN9393",
                 "test_contract_" + serviceType,
                 1753122600000L,
@@ -80,7 +80,7 @@ public class ContractTestModules {
      */
     @Test(dataProvider = "contractTypes", dataProviderClass = ContractDataProvider.class)
     public void testContractCreationWithDifferentContractTypes(String contractType) {
-        Response response = ContractApiV2.createContractWithParams(
+        Response response = ContractApi.createContractWithParams(
                 "SIN9393",
                 "test_contract_" + contractType,
                 1753122600000L,
@@ -110,7 +110,7 @@ public class ContractTestModules {
      */
     @Test(dataProvider = "contractRequestTypes", dataProviderClass = ContractDataProvider.class)
     public void testContractCreationWithDifferentRequestTypes(String requestType) {
-        Response response = ContractApiV2.createContractWithParams(
+        Response response = ContractApi.createContractWithParams(
                 "SIN9393",
                 "test_contract_" + requestType,
                 1753122600000L,
@@ -140,7 +140,7 @@ public class ContractTestModules {
      */
     @Test(dataProvider = "contractRateTypes", dataProviderClass = ContractDataProvider.class)
     public void testContractCreationWithDifferentRateTypes(String rateType) {
-        Response response = ContractApiV2.createContractWithParams(
+        Response response = ContractApi.createContractWithParams(
                 "SIN9393",
                 "test_contract_" + rateType.replace(" ", "_"),
                 1753122600000L,
@@ -170,7 +170,7 @@ public class ContractTestModules {
      */
     @Test(dataProvider = "contractTatUnits", dataProviderClass = ContractDataProvider.class)
     public void testContractCreationWithDifferentTatUnits(String tatDisplayUnit) {
-        Response response = ContractApiV2.createContractWithParams(
+        Response response = ContractApi.createContractWithParams(
                 "SIN9393",
                 "test_contract_" + tatDisplayUnit,
                 1753122600000L,
@@ -200,7 +200,7 @@ public class ContractTestModules {
      */
     @Test(dataProvider = "contractOrigins", dataProviderClass = ContractDataProvider.class)
     public void testContractCreationWithDifferentOrigins(String origin) {
-        Response response = ContractApiV2.createContractWithParams(
+        Response response = ContractApi.createContractWithParams(
                 "SIN9393",
                 "test_contract_" + origin,
                 1753122600000L,
@@ -230,7 +230,7 @@ public class ContractTestModules {
      */
     @Test(dataProvider = "contractDestinations", dataProviderClass = ContractDataProvider.class)
     public void testContractCreationWithDifferentDestinations(String destination) {
-        Response response = ContractApiV2.createContractWithParams(
+        Response response = ContractApi.createContractWithParams(
                 "SIN9393",
                 "test_contract_" + destination,
                 1753122600000L,
@@ -260,7 +260,7 @@ public class ContractTestModules {
      */
     @Test(dataProvider = "contractVendors", dataProviderClass = ContractDataProvider.class)
     public void testContractCreationWithDifferentVendors(String vendorId, String vendorName) {
-        Response response = ContractApiV2.createContractWithParams(
+        Response response = ContractApi.createContractWithParams(
                 vendorId,
                 "test_contract_" + vendorId,
                 1753122600000L,
@@ -290,7 +290,7 @@ public class ContractTestModules {
      */
     @Test
     public void testContractCreationWithIsSubmitTrue() {
-        Response response = ContractApiV2.createContractWithParams(
+        Response response = ContractApi.createContractWithParams(
                 "SIN9393",
                 "test_contract_submit_true",
                 1753122600000L,
@@ -320,7 +320,7 @@ public class ContractTestModules {
      */
     @Test
     public void testContractCreationWithIsSubmitFalse() {
-        Response response = ContractApiV2.createContractWithParams(
+        Response response = ContractApi.createContractWithParams(
                 "SIN9393",
                 "test_contract_submit_false",
                 1753122600000L,

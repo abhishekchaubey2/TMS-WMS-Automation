@@ -155,6 +155,33 @@ public class SpecBuilder {
         return headers;
     }
 
+    // WMS Request Spec Methods
+    public static RequestSpecification getWmsRequestSpec() {
+        return new RequestSpecBuilder()
+                .setBaseUri(ConfigLoader.getInstance().getWmsBaseUrl())
+                .setContentType(ContentType.JSON)
+                .addHeader("Accept", "*/*")
+                .log(LogDetail.ALL)
+                .build();
+    }
+    
+    public static RequestSpecification getWmsRequestSpecWithAuth(String accessToken) {
+        return new RequestSpecBuilder()
+                .setBaseUri(ConfigLoader.getInstance().getWmsBaseUrl())
+                .setContentType(ContentType.JSON)
+                .addHeaders(wmsHeadersWithAuth(accessToken))
+                .log(LogDetail.ALL)
+                .build();
+    }
+    
+    private static Map<String, String> wmsHeadersWithAuth(String accessToken) {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Accept", "*/*");
+        headers.put("Authorization", "Bearer " + accessToken);
+        return headers;
+    }
+
+
     // TMS FINISHED
     public static RequestSpecification getRequestSpecFormData(Map<String, String> data) {
         String tokenType = data.get("token_type");
