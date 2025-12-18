@@ -340,6 +340,14 @@ public class ConfigLoader {
     public String getWmsUserUuid() {
         return getProperty("wms.user.uuid");
     }
+
+    public String getWmsClientUuid() {
+        return getProperty("wms.client.uuid");
+    }
+
+    public String getWmsPackDefaultProductId() {
+        return getProperty("wms.pack.default.productId");
+    }
     
     // TMS Authentication getters
     public String getTmsAuthBaseUrl() {
