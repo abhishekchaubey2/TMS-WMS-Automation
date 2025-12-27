@@ -373,6 +373,23 @@ public class ConfigLoader {
     public String getTmsAuthTid() {
         return getProperty("tms.auth.tid");
     }
+    
+    // TMS Demand App Authentication getters
+    public String getTmsDemandAppClientId() {
+        return getProperty("tms.demand.app.clientId");
+    }
+    
+    public String getTmsDemandAppClientSecret() {
+        return getProperty("tms.demand.app.clientSecret");
+    }
+    
+    public String getTmsDemandAppAudience() {
+        return getProperty("tms.demand.app.audience");
+    }
+    
+    public String getTmsDemandAppAppId() {
+        return getProperty("tms.demand.app.appId");
+    }
 }
 
 
