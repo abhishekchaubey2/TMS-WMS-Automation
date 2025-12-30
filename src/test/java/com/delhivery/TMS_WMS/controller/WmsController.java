@@ -673,21 +673,6 @@ public class WmsController {
         return response;
     }
 
-    /**
-     * Get FIM Container Detail
-     */
-    public static Response getFimContainerDetail(String containerId) {
-        System.out.println("=== WMS Controller: Get FIM Container Detail ===");
-        System.out.println("Container ID: " + containerId);
-        
-        ConfigLoader config = ConfigLoader.getInstance();
-        Map<String, String> paramsMap = new HashMap<>();
-        paramsMap.put("fulfillment_center_id", config.getWmsFcUuid());
-        
-        Response response = WmsApiRequests.getFimContainerDetail(containerId, paramsMap);
-        System.out.println("Get FIM Container Detail Response Status: " + response.getStatusCode());
-        return response;
-    }
 
     /**
      * Complete Box
@@ -748,22 +733,6 @@ public class WmsController {
         return response;
     }
 
-    /**
-     * Fetch Auto Dimensions at RTS
-     */
-    public static Response fetchAutoDimensions(String waybill) {
-        System.out.println("=== WMS Controller: Fetching Auto Dimensions ===");
-        System.out.println("Waybill: " + waybill);
-        
-        ConfigLoader config = ConfigLoader.getInstance();
-        Map<String, String> paramsMap = new HashMap<>();
-        paramsMap.put("waybill_number", waybill);
-        paramsMap.put("fulfillment_center_uuid", config.getWmsFcUuid());
-        
-        Response response = WmsApiRequests.fetchAutoDimensions(paramsMap);
-        System.out.println("Fetch Auto Dimensions Response Status: " + response.getStatusCode());
-        return response;
-    }
 
     /**
      * Save Auto Dimensions (RTS)
