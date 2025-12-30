@@ -102,9 +102,14 @@ public class ExtentITestListenerAdapter implements ITestListener {
     //Handle test method child node creation
     private void handleTestMethodCreation(String methodName, String className) {
         if (!testMethodRegistry.containsKey(methodName)) {
-            ExtentTest methodExtTest = testClassRegistry.get(className).createNode(methodName);
-            testMethodRegistry.put(methodName, methodExtTest);
-            testMethod.set(methodExtTest);
+            ExtentTest testClassNode = testClassRegistry.get(className);
+            if (testClassNode != null) {
+                ExtentTest methodExtTest = testClassNode.createNode(methodName);
+                testMethodRegistry.put(methodName, methodExtTest);
+                testMethod.set(methodExtTest);
+            } else {
+                System.out.println("Warning: Test class node not found for " + className + ", skipping test method node creation for " + methodName);
+            }
         } else {
             System.out.println("Test method node already created for " + methodName);
         }
@@ -125,7 +130,10 @@ public class ExtentITestListenerAdapter implements ITestListener {
     //It logs the test method as passed
     @Override
     public synchronized void onTestSuccess(ITestResult result) {
-        getTest(result).pass("Test Passed");
+        ExtentTest test = getTest(result);
+        if (test != null) {
+            test.pass("Test Passed");
+        }
     }
 
     //Get test method node
@@ -142,14 +150,20 @@ public class ExtentITestListenerAdapter implements ITestListener {
     //It logs the test method as failed
     @Override
     public synchronized void onTestFailure(ITestResult result) {
-        getTest(result).fail(result.getThrowable());
+        ExtentTest test = getTest(result);
+        if (test != null) {
+            test.fail(result.getThrowable());
+        }
     }
 
     //This method is called when the test method is skipped
     //It logs the test method as skipped
     @Override
     public synchronized void onTestSkipped(ITestResult result) {
-        getTest(result).skip(result.getThrowable());
+        ExtentTest test = getTest(result);
+        if (test != null) {
+            test.skip(result.getThrowable());
+        }
     }
 
     @Override

@@ -18,6 +18,8 @@ public class WmsController {
 
     // Store last created order number for future use
     private static String lastCreatedOrderNumber = null;
+    // Store last order create request id for request-tracker (if needed)
+    private static String lastOrderCreateRequestId = null;
     // Store last created pickwave request id for future use
     private static String lastPickwaveRequestId = null;
     // Store last pickwave id and pick ids from filters API
@@ -62,6 +64,9 @@ public class WmsController {
         // Call Application API layer
         CreateOrderResponse response = WmsApiRequests.createOrderAndGetResponse(request);
 
+        // Store request id for potential request-tracker checks
+        lastOrderCreateRequestId = response.getRequestId();
+
         System.out.println("Order created: " + (response.getSuccess() ? "SUCCESS" : "FAILED"));
 
         return response;
@@ -94,6 +99,10 @@ public class WmsController {
         return lastCreatedOrderNumber;
     }
 
+    public static String getLastOrderCreateRequestId() {
+        return lastOrderCreateRequestId;
+    }
+
     public static String getLastPickwaveRequestId() {
         return lastPickwaveRequestId;
     }
@@ -111,6 +120,17 @@ public class WmsController {
     }
 
     /**
+     * Update outbound FC configuration in WMS.
+     */
+    public static Response updateOutboundFcConfig() {
+        System.out.println("=== WMS Controller: Updating Outbound FC Config ===");
+        Response response = WmsApiRequests.updateOutboundFcConfig();
+        System.out.println("Update FC Config Response Status: " + response.getStatusCode());
+        System.out.println("Update FC Config Response Body: " + response.getBody().asPrettyString());
+        return response;
+    }
+
+    /**
      * Fetch WMS request tracker logs for the last created pickwave
      *
      * @return raw Response containing logs
@@ -122,6 +142,20 @@ public class WmsController {
         System.out.println("=== WMS Controller: Fetching Request Tracker Logs ===");
         System.out.println("Using Request ID: " + lastPickwaveRequestId);
         return WmsApiRequests.getRequestTrackerLogs(lastPickwaveRequestId);
+    }
+
+    /**
+     * Fetch WMS request tracker logs for the last order create request.
+     *
+     * @return raw Response containing logs
+     */
+    public static Response getOrderCreateRequestStatus() {
+        if (lastOrderCreateRequestId == null) {
+            throw new IllegalStateException("No order create request id stored yet");
+        }
+        System.out.println("=== WMS Controller: Fetching Order Create Request Status ===");
+        System.out.println("Using Request ID: " + lastOrderCreateRequestId);
+        return WmsApiRequests.getRequestTrackerLogs(lastOrderCreateRequestId);
     }
 
     /**
@@ -273,6 +307,171 @@ public class WmsController {
 
         System.out.println("Get Picklist Response Status: " + response.getStatusCode());
         System.out.println("Get Picklist Response Body: " + response.getBody().asPrettyString());
+
+        return response;
+    }
+
+    /**
+     * Assign picklist to current WMS user.
+     */
+    public static Response assignPicklistToUser(int pickWaveId, int pickListId) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String user = config.getWmsUserUuid();
+        String fc = config.getWmsFcUuid();
+
+        System.out.println("=== WMS Controller: Assign Picklist To User ===");
+        System.out.println("Pickwave ID: " + pickWaveId + ", Picklist ID: " + pickListId + ", User: " + user);
+
+        Response response = WmsApiRequests.assignPicklistToUser(pickListId, user, fc);
+
+        System.out.println("Assign Picklist To User Response Status: " + response.getStatusCode());
+        System.out.println("Assign Picklist To User Response Body: " + response.getBody().asPrettyString());
+
+        return response;
+    }
+
+    /**
+     * Update picklist container item using provided payload.
+     */
+    public static Response updatePicklistContainerItem(int itemId, java.util.Map<String, Object> body) {
+        System.out.println("=== WMS Controller: Update Picklist Container Item ===");
+        System.out.println("Item ID: " + itemId);
+
+        Response response = WmsApiRequests.updatePicklistContainerItem(itemId, body);
+
+        System.out.println("Update Container Item Response Status: " + response.getStatusCode());
+        System.out.println("Update Container Item Response Body: " + response.getBody().asPrettyString());
+
+        return response;
+    }
+
+    /**
+     * Complete picklist.
+     */
+    public static Response completePicklist(int pickListId) {
+        System.out.println("=== WMS Controller: Complete Picklist ===");
+        System.out.println("Picklist ID: " + pickListId);
+
+        Response response = WmsApiRequests.completePicklist(pickListId, false, false);
+
+        System.out.println("Complete Picklist Response Status: " + response.getStatusCode());
+        System.out.println("Complete Picklist Response Body: " + response.getBody().asPrettyString());
+
+        return response;
+    }
+
+    /**
+     * Fetch pickwave filters for last shipment with custom status.
+     */
+    public static Response getPickwaveFiltersForLastShipmentWithStatus(String status) {
+        if (lastCreatedOrderNumber == null) {
+            throw new IllegalStateException("No WMS order/shipment number stored yet");
+        }
+
+        ConfigLoader config = ConfigLoader.getInstance();
+        String shipmentNumber = lastCreatedOrderNumber;
+        String fc = config.getWmsFcUuid();
+
+        System.out.println("=== WMS Controller: Fetching Pickwave Filters v2 (custom status) ===");
+        System.out.println("Using Shipment Number: " + shipmentNumber + ", Status: " + status);
+
+        return WmsApiRequests.getPickwaveFilters(
+                status,
+                shipmentNumber,
+                0,
+                fc,
+                false
+        );
+    }
+
+    /**
+     * Initiate pack for the given container id.
+     */
+    public static Response initiatePack(String containerId) {
+        System.out.println("=== WMS Controller: Initiate Pack ===");
+        System.out.println("Container ID: " + containerId);
+
+        Response response = WmsApiRequests.initiatePack(containerId);
+
+        System.out.println("Pack Initiate Response Status: " + response.getStatusCode());
+        System.out.println("Pack Initiate Response Body: " + response.getBody().asPrettyString());
+
+        return response;
+    }
+
+    /**
+     * Get FIM container detail for the given container id.
+     */
+    public static Response getFimContainerDetail(String containerId) {
+        System.out.println("=== WMS Controller: Get FIM Container Detail ===");
+        System.out.println("Container ID: " + containerId);
+
+        Response response = WmsApiRequests.getFimContainerDetail(containerId);
+
+        System.out.println("FIM Container Detail Response Status: " + response.getStatusCode());
+        System.out.println("FIM Container Detail Response Body: " + response.getBody().asPrettyString());
+
+        return response;
+    }
+
+    /**
+     * Complete box for shipment using given container id and product details.
+     */
+    public static Response completeBox(long shipmentId, String containerId) {
+        ConfigLoader config = ConfigLoader.getInstance();
+
+        System.out.println("=== WMS Controller: Complete Box ===");
+        System.out.println("Shipment ID: " + shipmentId + ", Container ID: " + containerId);
+
+        java.util.Map<String, Object> product = new java.util.HashMap<>();
+        product.put("product_id", config.getWmsPackDefaultProductId());
+        product.put("quantity", 1);
+        product.put("siob", false);
+        product.put("client_uuid", config.getWmsClientUuid());
+
+        java.util.Map<String, Object> container = new java.util.HashMap<>();
+        container.put("container_id", containerId);
+        container.put("products", java.util.Collections.singletonList(product));
+
+        java.util.Map<String, Object> body = new java.util.HashMap<>();
+        body.put("fulfillment_center_id", config.getWmsFcUuid());
+        body.put("shipment_id", String.valueOf(shipmentId));
+        body.put("containers", java.util.Collections.singletonList(container));
+
+        Response response = WmsApiRequests.completeBox(body);
+
+        System.out.println("Complete Box Response Status: " + response.getStatusCode());
+        System.out.println("Complete Box Response Body: " + response.getBody().asPrettyString());
+
+        return response;
+    }
+
+    /**
+     * Pack shipment for given shipment id.
+     */
+    public static Response packShipment(long shipmentId) {
+        System.out.println("=== WMS Controller: Pack Shipment ===");
+        System.out.println("Shipment ID: " + shipmentId);
+
+        Response response = WmsApiRequests.packShipment(shipmentId);
+
+        System.out.println("Pack Shipment Response Status: " + response.getStatusCode());
+        System.out.println("Pack Shipment Response Body: " + response.getBody().asPrettyString());
+
+        return response;
+    }
+
+    /**
+     * Fetch auto dimensions for a given waybill / barcode identifier.
+     */
+    public static Response fetchAutoDimensions(String barcodeIdentifier) {
+        System.out.println("=== WMS Controller: Fetch Auto Dimensions ===");
+        System.out.println("Barcode Identifier: " + barcodeIdentifier);
+
+        Response response = WmsApiRequests.fetchAutoDimensions(barcodeIdentifier);
+
+        System.out.println("Fetch Auto Dimensions Response Status: " + response.getStatusCode());
+        System.out.println("Fetch Auto Dimensions Response Body: " + response.getBody().asPrettyString());
 
         return response;
     }
@@ -474,21 +673,6 @@ public class WmsController {
         return response;
     }
 
-    /**
-     * Get FIM Container Detail
-     */
-    public static Response getFimContainerDetail(String containerId) {
-        System.out.println("=== WMS Controller: Get FIM Container Detail ===");
-        System.out.println("Container ID: " + containerId);
-        
-        ConfigLoader config = ConfigLoader.getInstance();
-        Map<String, String> paramsMap = new HashMap<>();
-        paramsMap.put("fulfillment_center_id", config.getWmsFcUuid());
-        
-        Response response = WmsApiRequests.getFimContainerDetail(containerId, paramsMap);
-        System.out.println("Get FIM Container Detail Response Status: " + response.getStatusCode());
-        return response;
-    }
 
     /**
      * Complete Box
@@ -549,22 +733,6 @@ public class WmsController {
         return response;
     }
 
-    /**
-     * Fetch Auto Dimensions at RTS
-     */
-    public static Response fetchAutoDimensions(String waybill) {
-        System.out.println("=== WMS Controller: Fetching Auto Dimensions ===");
-        System.out.println("Waybill: " + waybill);
-        
-        ConfigLoader config = ConfigLoader.getInstance();
-        Map<String, String> paramsMap = new HashMap<>();
-        paramsMap.put("waybill_number", waybill);
-        paramsMap.put("fulfillment_center_uuid", config.getWmsFcUuid());
-        
-        Response response = WmsApiRequests.fetchAutoDimensions(paramsMap);
-        System.out.println("Fetch Auto Dimensions Response Status: " + response.getStatusCode());
-        return response;
-    }
 
     /**
      * Save Auto Dimensions (RTS)

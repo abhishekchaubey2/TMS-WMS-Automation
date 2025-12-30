@@ -1,0 +1,15 @@
+{
+  "servers": {
+    "selenium": {
+      "command": "node",
+      "args": [
+        "/home/abhishek/mcp-selenium/index.js"
+      ],
+      "env": {
+        "SELENIUM_SERVER_URL": "http://localhost:4444",
+        "BROWSER": "chrome",
+        "HEADLESS": "false"
+      }
+    }
+  }
+}

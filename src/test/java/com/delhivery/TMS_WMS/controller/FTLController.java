@@ -208,11 +208,12 @@ public class FTLController {
      * Create FTL Load (Demand) in TMS
      * Reuses existing TmsApiRequests.createDemand() with FTL-specific parameters
      * 
+     * @param demandAppToken The demand app token for authentication
      * @param tmsOrderId The TMS Order ID (e.g., tmsWM9350$707345)
      * @param destinationFacility Destination facility code (e.g., DLV_4f4ad67c)
      * @return CreateDemandResponse
      */
-    public static CreateDemandResponse createFTLLoad(String tmsOrderId, String destinationFacility) {
+    public static CreateDemandResponse createFTLLoad(String demandAppToken, String tmsOrderId, String destinationFacility) {
         System.out.println("=== FTL Controller: Creating FTL Load (Demand) ===");
         System.out.println("TMS Order ID: " + tmsOrderId);
         System.out.println("Destination Facility: " + destinationFacility);
@@ -247,7 +248,7 @@ public class FTLController {
         request.setRouteDetails(routeDetails);
         
         // Call existing TMS API (reusing existing implementation)
-        CreateDemandResponse response = TmsApiRequests.createDemand(request);
+        CreateDemandResponse response = TmsApiRequests.createDemand(demandAppToken, request);
         
         // Store Unique Code and Demand ID from response
         if (response.getData() != null && 
@@ -425,9 +426,10 @@ public class FTLController {
      * Create FTL Load (Demand) in TMS using stored TMS Order ID
      * Extracts destination facility from TMS order or uses default
      * 
+     * @param demandAppToken The demand app token for authentication
      * @return CreateDemandResponse
      */
-    public static CreateDemandResponse createFTLLoad() {
+    public static CreateDemandResponse createFTLLoad(String demandAppToken) {
         if (foundTmsOrderId == null) {
             throw new IllegalStateException("TMS Order ID not found. Please verify FTL order in TMS first.");
         }
@@ -438,7 +440,7 @@ public class FTLController {
             ? foundTmsDestinationFacility 
             : config.getProperty("ftl.demand.default.destinationFacility", "DLV_4f4ad67c");
         
-        return createFTLLoad(foundTmsOrderId, destinationFacility);
+        return createFTLLoad(demandAppToken, foundTmsOrderId, destinationFacility);
     }
     
     /**

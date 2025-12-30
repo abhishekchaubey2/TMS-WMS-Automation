@@ -1,0 +1,35 @@
+curl -X POST 'https://del0gaxgj1.sandbox.getos1.com/tms/api/v1/demands/' \
+  -H 'accept: application/json, text/plain, */*' \
+  -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \
+  -H 'priority: u=1, i' \
+  -H 'sec-ch-ua: "Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Linux"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36' \
+  -H 'content-type: application/json' \
+  -H 'x-coreos-access: ' \
+  -H 'x-coreos-auth: ' \
+  -H 'callback: https://del0gaxgj1.sandbox.getos1.com/sse/broker/event/del0gaxgj1:app3b33f2a973df5c94a354fe49093b4701:4067921e-0b17-4097-bf55-8f155091fca3' \
+  -H 'origin: https://del0gaxgj1.sandbox.getos1.com' \
+  -H 'x-coreos-request-id: OS1-RequestId:-c01046cc-a1e6-4322-97da-0e23e0d201ab' \
+  -H 'x-coreos-tid: del0gaxgj1' \
+  -H 'x-coreos-userinfo: {"id":"d249d757-cd97-4fe8-a7da-fc15f53f2642","name":"Shivam Singh"}' \
+  -H 'x-tms-data-access: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyR3JvdXBzIjpbIlRNUy1Pd25lciJdLCJmYWNpbGl0aWVzIjpbXSwidXNlclR5cGUiOiJzaGlwcGVyIn0.IASh8wau5nfClWVDmbi5_p4A5_v4paxBSiSSJwno2GY' \
+  -d '{
+    "serviceType": "LTL",
+    "routeDetails": {
+        "originFacility": "AUTOFC1",
+        "stops": [],
+        "destinationFacility": "DLV_ec0ebee9"
+    },
+    "vehicleName": null,
+    "expDispatchAt": 1766223937105,
+    "orderIds": [
+        "SH17667600304552$171264"
+    ]
+}'
+
+

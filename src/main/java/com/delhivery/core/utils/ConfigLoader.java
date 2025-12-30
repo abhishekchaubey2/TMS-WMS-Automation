@@ -340,6 +340,14 @@ public class ConfigLoader {
     public String getWmsUserUuid() {
         return getProperty("wms.user.uuid");
     }
+
+    public String getWmsClientUuid() {
+        return getProperty("wms.client.uuid");
+    }
+
+    public String getWmsPackDefaultProductId() {
+        return getProperty("wms.pack.default.productId");
+    }
     
     // TMS Authentication getters
     public String getTmsAuthBaseUrl() {
@@ -364,6 +372,23 @@ public class ConfigLoader {
     
     public String getTmsAuthTid() {
         return getProperty("tms.auth.tid");
+    }
+    
+    // TMS Demand App Authentication getters
+    public String getTmsDemandAppClientId() {
+        return getProperty("tms.demand.app.clientId");
+    }
+    
+    public String getTmsDemandAppClientSecret() {
+        return getProperty("tms.demand.app.clientSecret");
+    }
+    
+    public String getTmsDemandAppAudience() {
+        return getProperty("tms.demand.app.audience");
+    }
+    
+    public String getTmsDemandAppAppId() {
+        return getProperty("tms.demand.app.appId");
     }
 }
 

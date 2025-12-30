@@ -1,5 +1,6 @@
 package com.delhivery.TMS_WMS.testModules;
 
+import com.delhivery.TMS_WMS.api.DemandAppAuthApi;
 import com.delhivery.TMS_WMS.controller.FTLController;
 import com.delhivery.TMS_WMS.pojo.ftlorder.response.CreateFTLOrderResponse;
 import com.delhivery.core.BaseTest;
@@ -27,6 +28,8 @@ public class FTLFlow extends BaseTest {
     private static String ftlDemandId;
     private static String ftlTripId;
     private static String ftlDispatchId;
+    // Static variable to store demand app token
+    private static String demandAppTokenStatic;
     
     @BeforeClass
     public void setUp() {
@@ -117,9 +120,23 @@ public class FTLFlow extends BaseTest {
         
         System.out.println("Using TMS Order ID: " + tmsOrderId);
         
-        // Create FTL Load using stored TMS Order ID
+        // Generate or retrieve Demand App Token
+        if (demandAppTokenStatic == null) {
+            System.out.println("Generating Demand App Token...");
+            io.restassured.response.Response authResponse = DemandAppAuthApi.authenticate();
+            int statusCode = authResponse.getStatusCode();
+            Assert.assertEquals(statusCode, 200, "Demand App Token API should return HTTP 200");
+            String accessToken = authResponse.jsonPath().getString("data.accessToken");
+            Assert.assertNotNull(accessToken, "Access Token should not be null");
+            demandAppTokenStatic = accessToken;
+            System.out.println("✓ Demand App Token generated successfully");
+        }
+        
+        System.out.println("Using Demand App Token (first 50 chars): " + demandAppTokenStatic.substring(0, Math.min(50, demandAppTokenStatic.length())) + "...");
+        
+        // Create FTL Load using stored TMS Order ID and demand app token
         // Destination facility will be extracted from TMS order or use default
-        com.delhivery.TMS_WMS.pojo.tms.response.CreateDemandResponse response = FTLController.createFTLLoad();
+        com.delhivery.TMS_WMS.pojo.tms.response.CreateDemandResponse response = FTLController.createFTLLoad(demandAppTokenStatic);
         
         // Assertions
         Assert.assertNotNull(response, "FTL Load response should not be null");

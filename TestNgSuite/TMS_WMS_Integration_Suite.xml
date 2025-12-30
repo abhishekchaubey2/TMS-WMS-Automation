@@ -17,7 +17,9 @@
             <!-- WMS Order Tests -->
             <class name="com.delhivery.TMS_WMS.testModules.WmsOrderTest">
                 <methods>
+                    <include name="testUpdateWmsOutboundConfig"/>
                     <include name="testCreateWmsOrder"/>
+                    <include name="testGetOrderCreateRequestStatus"/>
                     <include name="testVerifyOrderInTms"/>
                     <include name="testCreateDemand"/>
                     <include name="testCreatePickwave"/>
@@ -25,6 +27,15 @@
                     <include name="testVerifyPickwaveFilters"/>
                     <include name="testAssignContainerToPicklist"/>
                     <include name="testVerifyPicklistDetails"/>
+                    <include name="testAssignPicklistToUser"/>
+                    <include name="testUpdateContainerItem"/>
+                    <include name="testCompletePicklist"/>
+                    <include name="testVerifyPickwaveStatusDone"/>
+                    <include name="testPackInitiate"/>
+                    <include name="testGetFimContainerDetail"/>
+                    <include name="testCompleteBox"/>
+                    <include name="testPackShipment"/>
+                    <include name="testFetchAutoDimensionsAtRts"/>
                 </methods>
             </class>
             
