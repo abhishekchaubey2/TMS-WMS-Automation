@@ -226,8 +226,13 @@ public class WmsOrderTest extends BaseTest {
         Assert.assertNotNull(foundTmsOrderIdStatic, "TMS Order ID from previous step should not be null");
         System.out.println("Using TMS Order ID: " + foundTmsOrderIdStatic);
         
+        // Retrieve the Demand App Token
+        String demandAppToken = TmsWmsLtlTest.getDemandAppToken();
+        Assert.assertNotNull(demandAppToken, "Demand App Token should be available for creating demand");
+        System.out.println("Using Demand App Token (first 50 chars): " + demandAppToken.substring(0, Math.min(50, demandAppToken.length())) + "...");
+        
         com.delhivery.TMS_WMS.pojo.tms.response.CreateDemandResponse response = 
-            com.delhivery.TMS_WMS.controller.TmsController.createDemand(foundTmsOrderIdStatic);
+            com.delhivery.TMS_WMS.controller.TmsController.createDemand(demandAppToken, foundTmsOrderIdStatic);
             
         Assert.assertNotNull(response, "Create Demand Response should not be null");
         Assert.assertTrue(response.getSuccess(), "Create Demand should be successful");

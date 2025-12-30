@@ -21,10 +21,11 @@ public class TmsController {
     
     /**
      * Create Demand in TMS for a specific Order ID
+     * @param demandAppToken The demand app token for authentication
      * @param orderId The WMS Order ID (e.g., wmstmsintltl371$706629)
      * @return CreateDemandResponse
      */
-    public static CreateDemandResponse createDemand(String orderId) {
+    public static CreateDemandResponse createDemand(String demandAppToken, String orderId) {
         System.out.println("=== TMS Controller: Creating Demand ===");
         System.out.println("Order ID: " + orderId);
         
@@ -43,7 +44,7 @@ public class TmsController {
         request.setRouteDetails(routeDetails);
         
         // Call API
-        CreateDemandResponse response = TmsApiRequests.createDemand(request);
+        CreateDemandResponse response = TmsApiRequests.createDemand(demandAppToken, request);
         
         // Store Unique Code
         if (response.getData() != null && 
@@ -248,7 +249,7 @@ public class TmsController {
         
         request.setRouteDetails(routeDetails);
         
-        // Call API
+        // Call API (uses token from properties file)
         io.restassured.response.Response response = TmsApiRequests.createLtlLoad(request);
         
         // Store response
