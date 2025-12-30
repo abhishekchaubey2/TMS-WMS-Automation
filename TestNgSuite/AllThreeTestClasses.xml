@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="AllThreeTestClasses_Suite" parallel="false" verbose="2">
+    
+    <test name="TmsWmsLtlTest" preserve-order="true">
+        <groups>
+            <run>
+                <include name="LTL"/>
+                <include name="Auth"/>
+                <include name="Config"/>
+                <include name="OrderCreation"/>
+                <include name="LoadCreation"/>
+                <include name="OrderUpdate"/>
+                <include name="Indents"/>
+            </run>
+        </groups>
+        
+        <classes>
+            <class name="com.delhivery.TMS_WMS.testModules.TmsWmsLtlTest">
+                <methods>
+                    <include name="testGenerateOrderAppToken"/>
+                    <include name="testVerifyOrderAppTokenStored"/>
+                    <include name="testGenerateDemandAppToken"/>
+                    <include name="testVerifyDemandAppTokenStored"/>
+                    <include name="testCreateLtlOrder"/>
+                    <include name="testCreateLtlLoad"/>
+                    <include name="testUpdateLtlOrder"/>
+                    <include name="testGetIndentsByLoadId"/>
+                    <include name="testCheckIndentDetailAndRetry"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="WmsOrderTest" preserve-order="true">
+        <groups>
+            <run>
+                <include name="WMS"/>
+                <include name="Integration"/>
+                <include name="TMS"/>
+            </run>
+        </groups>
+        
+        <classes>
+            <class name="com.delhivery.TMS_WMS.testModules.WmsOrderTest">
+                <methods>
+                    <include name="testUpdateWmsOutboundConfig"/>
+                    <include name="testCreateWmsOrder"/>
+                    <include name="testGetOrderCreateRequestStatus"/>
+                    <include name="testVerifyOrderInTms"/>
+                    <include name="testCreateDemand"/>
+                    <include name="testCreatePickwave"/>
+                    <include name="testVerifyPickwaveLogs"/>
+                    <include name="testVerifyPickwaveFilters"/>
+                    <include name="testAssignContainerToPicklist"/>
+                    <include name="testVerifyPicklistDetails"/>
+                    <include name="testAssignPicklistToUser"/>
+                    <include name="testUpdateContainerItem"/>
+                    <include name="testCompletePicklist"/>
+                    <include name="testVerifyPickwaveStatusDone"/>
+                    <include name="testPackInitiate"/>
+                    <include name="testGetFimContainerDetail"/>
+                    <include name="testCompleteBox"/>
+                    <include name="testPackShipment"/>
+                    <include name="testFetchAutoDimensionsAtRts"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="FTLFlow" preserve-order="true">
+        <groups>
+            <run>
+                <include name="FTL"/>
+                <include name="OrderCreation"/>
+                <include name="DemandCreation"/>
+                <include name="ContractAssignment"/>
+                <include name="IndentCreation"/>
+                <include name="Orion"/>
+                <include name="Trip"/>
+                <include name="Bid"/>
+                <include name="WMS"/>
+                <include name="Pickwave"/>
+                <include name="Picking"/>
+                <include name="Packing"/>
+                <include name="RTS"/>
+                <include name="Dispatch"/>
+            </run>
+        </groups>
+        
+        <classes>
+            <class name="com.delhivery.TMS_WMS.testModules.FTLFlow">
+                <methods>
+                    <include name="testCreateFTLOrder"/>
+                    <include name="testVerifyFTLOrderInTms"/>
+                    <include name="testCreateFTLDemand"/>
+                    <include name="testVerifyFTLLoadInPlanTab"/>
+                    <include name="testAssignSpotContract"/>
+                    <include name="testCreateIndent"/>
+                    <include name="testGetTripFromOrion"/>
+                    <include name="testPlaceBidForTrip"/>
+                    <include name="testConfirmBidForTrip"/>
+                    <include name="testMarkReportedForIndent"/>
+                    <include name="testCreatePickwaveForFTLOrder"/>
+                    <include name="testGetPickwaveCreateRequestStatus"/>
+                    <include name="testGetPickwaveFilters"/>
+                    <include name="testAssignPicklistToUser"/>
+                    <include name="testAssignPickContainer"/>
+                    <include name="testGetPicklistDetails"/>
+                    <include name="testUpdateContainerItem"/>
+                    <include name="testCompletePicklist"/>
+                    <include name="testPackInitiate"/>
+                    <include name="testGetFimContainerDetail"/>
+                    <include name="testCompleteBox"/>
+                    <include name="testPackShipment"/>
+                    <include name="testFetchAutoDimensionsAtRts"/>
+                    <include name="testSaveAutoDimensions"/>
+                    <include name="testVerifyShipmentStatus"/>
+                    <include name="testCreateDispatch"/>
+                    <include name="testAddWaybillToDispatch"/>
+                    <include name="testCompleteDispatch"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+</suite>
+
