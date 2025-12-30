@@ -4,6 +4,7 @@ import com.delhivery.TMS_WMS.api.WmsAuthApi;
 import com.delhivery.TMS_WMS.pojo.picklist.response.GetPicklistResponse;
 import com.delhivery.TMS_WMS.pojo.wmsorder.request.CreateOrderRequest;
 import com.delhivery.TMS_WMS.pojo.wmsorder.response.CreateOrderResponse;
+import com.delhivery.TMS_WMS.pojo.wmsoutbound.request.*;
 import com.delhivery.core.utils.ConfigLoader;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -23,10 +24,23 @@ public class WmsApiRequests {
     // Route constants
     private static final String CREATE_ORDER = "/wms/qa2/order-management/order/create";
     private static final String CREATE_PICKWAVE = "/wms/qa2/pick/pickwave/create";
+    private static final String CREATE_PICKWAVE_PCA = "/wms/qa2/pick/pickwave/create-pickwave-pca-algorithm";
     private static final String REQUEST_TRACKER_LOGS = "/wms/qa2/request-tracker/logs";
     private static final String PICKWAVE_FILTERS_V2 = "/wms/qa2/pick/pickwave/filters/v2";
     private static final String GET_PICKLIST = "/wms/qa2/pick/get/picklist";
     private static final String ASSIGN_PICKLIST_CONTAINER = "/wms/qa2/pick/picklist/assign/container";
+    private static final String ASSIGN_PICKLIST_USER = "/wms/qa2/pick/picklist/assign/user/";
+    private static final String UPDATE_CONTAINER = "/wms/qa2/pick/picklist/update/container/item";
+    private static final String PICKLIST_COMPLETE = "/wms/qa2/pick/picklist/complete";
+    private static final String PACK_INITIATE = "/wms/qa2/pack/initiate/";
+    private static final String FIM_CONTAINER_DETAIL = "/wms/qa2/fulfillment-inventory-management/container/detail";
+    private static final String COMPLETE_BOX = "/wms/qa2/pack/complete-box";
+    private static final String SHIPMENT_PACK = "/wms/qa2/pack/shipment-pack";
+    private static final String FETCH_AUTO_DIMENSIONS = "/wms/qa2/rts-dispatch/fetch-auto-dimensions";
+    private static final String SAVE_AUTO_DIMENSIONS = "/wms/qa2/rts-dispatch/save-auto-dimensions";
+    private static final String CREATE_DISPATCH = "/wms/qa2/rts-dispatch/create-dispatch";
+    private static final String ADD_WAYBILL = "/wms/qa2/rts-dispatch/add-waybill";
+    private static final String COMPLETE_DISPATCH = "/wms/qa2/rts-dispatch/complete-dispatch";
     private static final String CREATE_CONTAINER = "/wms/qa2/fulfillment-inventory-management/container/create";
     
     /**
@@ -36,16 +50,18 @@ public class WmsApiRequests {
      */
     public static Response createOrder(CreateOrderRequest request) {
         ConfigLoader config = ConfigLoader.getInstance();
+        // Get WMS token from WmsAuthApi (same source as all other WMS API calls)
         String wmsToken = WmsAuthApi.getAccessToken();
         
         System.out.println("=== WMS Create Order API Call ===");
         System.out.println("Endpoint: " + CREATE_ORDER);
-        System.out.println("Token: " + wmsToken.substring(0, Math.min(20, wmsToken.length())) + "...");
+        System.out.println("FC UUID: " + config.getWmsFcUuid());
+        System.out.println("WMS Token: " + (wmsToken != null ? wmsToken.substring(0, Math.min(50, wmsToken.length())) + "..." : "null"));
         
         return given()
                 .baseUri(config.getWmsBaseUrl())
                 .contentType(ContentType.JSON)
-                .header("Authorization", wmsToken)
+                .header("Authorization", "Bearer " + wmsToken)
                 .header("fc-uuid", config.getWmsFcUuid())
                 .header("User-Uuid", config.getWmsUserUuid())
                 .header("Accept", "*/*")
@@ -122,6 +138,65 @@ public class WmsApiRequests {
     }
 
     /**
+     * Create Pickwave using PCA Algorithm in WMS for a given shipment id
+     * Uses the new PCA algorithm endpoint
+     *
+     * curl -X POST "https://qa2-api-wms.delhivery.com/wms/qa2/pick/pickwave/create-pickwave-pca-algorithm"
+     *   -H "Content-Type: application/json"
+     *   -H "fc-uuid: db313a0b5c6942a2b7bf81cbf0639f52"
+     *   -H "User-Uuid: UMSAU002"
+     *   -H "Authorization: Bearer <TOKEN>"
+     *   -d '{"create_by":"shipments","fc":"db313a0b5c6942a2b7bf81cbf0639f52","shipment_count":1,
+     *        "workflow":"31","created_by":"autouser","shipment_id":[707381]}'
+     *
+     * @param shipmentId numeric shipment id (part after '$' in orderID)
+     * @return raw Response from WMS API
+     */
+    public static Response createPickwavePCA(int shipmentId) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Create Pickwave PCA Algorithm API Call ===");
+        System.out.println("Endpoint: " + CREATE_PICKWAVE_PCA);
+        System.out.println("Shipment ID: " + shipmentId);
+
+        // Build request body as per curl - shipment_id is directly in body, not in filters
+        Map<String, Object> body = new HashMap<>();
+        body.put("create_by", "shipments");
+        body.put("fc", config.getWmsFcUuid());
+        body.put("shipment_count", 1);
+        body.put("workflow", "31");
+        body.put("created_by", "autouser");
+        body.put("shipment_id", Collections.singletonList(shipmentId));
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .header("Accept", "application/json, text/plain, */*")
+                .header("Accept-Language", "en-GB,en-US;q=0.9,en;q=0.8")
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("Content-Type", "application/json")
+                .header("Origin", "https://qa2-wms.delhivery.com")
+                .header("Referer", "https://qa2-wms.delhivery.com/")
+                .header("Sec-Fetch-Dest", "empty")
+                .header("Sec-Fetch-Mode", "cors")
+                .header("Sec-Fetch-Site", "same-site")
+                .header("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36")
+                .header("User-Uuid", config.getWmsUserUuid())
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("sec-ch-ua", "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"")
+                .header("sec-ch-ua-mobile", "?0")
+                .header("sec-ch-ua-platform", "\"Linux\"")
+                .body(body)
+                .log().all()
+                .when()
+                .post(CREATE_PICKWAVE_PCA)
+                .then()
+                .log().all()
+                .extract()
+                .response();
+    }
+
+    /**
      * Get WMS request tracker logs for a given request_id
      *
      * Mirrors:
@@ -185,17 +260,22 @@ public class WmsApiRequests {
                                               String fulfillmentCenter,
                                               boolean multiContainer) {
         ConfigLoader config = ConfigLoader.getInstance();
+        // Get WMS token from WmsAuthApi (same source as all other WMS API calls)
         String wmsToken = WmsAuthApi.getAccessToken();
 
         System.out.println("=== WMS Pickwave Filters v2 API Call ===");
         System.out.println("Endpoint: " + PICKWAVE_FILTERS_V2);
         System.out.println("Status: " + status + ", ShipmentNumber: " + shipmentNumber);
+        System.out.println("FulfillmentCenter: " + fulfillmentCenter);
+        System.out.println("WMS Token: " + (wmsToken != null ? wmsToken.substring(0, Math.min(50, wmsToken.length())) + "..." : "null"));
 
+        // For GET requests, query params go in URL, not body
+        // Query parameters are added to URL via .queryParam()
         return given()
                 .baseUri(config.getWmsBaseUrl())
-                .contentType(ContentType.JSON)
+                .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + wmsToken)
-                .header("fc-uuid", config.getWmsFcUuid())
+                .header("fc-uuid", fulfillmentCenter)  // Use the passed fulfillmentCenter parameter
                 .header("User-Uuid", config.getWmsUserUuid())
                 .queryParam("status", status)
                 .queryParam("shipmentNumber", shipmentNumber)
@@ -317,6 +397,296 @@ public class WmsApiRequests {
                 .queryParam("multi_container", multiContainer)
                 .when()
                 .get(GET_PICKLIST)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Assign Picklist to User
+     */
+    public static Response assignPicklist(AssignPicklistRequest request) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Assign Picklist to User API Call ===");
+        System.out.println("Endpoint: " + ASSIGN_PICKLIST_USER);
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("User-Uuid", config.getWmsUserUuid())
+                .body(request)
+                .when()
+                .put(ASSIGN_PICKLIST_USER)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Update Container Item (Picking)
+     */
+    public static Response updateContainerItem(UpdateContainerRequest request, String paramKey, String paramValue) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Update Container Item API Call ===");
+        System.out.println("Endpoint: " + UPDATE_CONTAINER);
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("User-Uuid", config.getWmsUserUuid())
+                .queryParam(paramKey, paramValue)
+                .body(request)
+                .when()
+                .put(UPDATE_CONTAINER)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Complete Picklist
+     */
+    public static Response completePicklist(CompletePicklistRequest request, String paramKey, String paramValue) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Complete Picklist API Call ===");
+        System.out.println("Endpoint: " + PICKLIST_COMPLETE);
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("User-Uuid", config.getWmsUserUuid())
+                .queryParam(paramKey, paramValue)
+                .body(request)
+                .when()
+                .put(PICKLIST_COMPLETE)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Pack Initiate
+     */
+    public static Response packInitiate(String pickContainer, Map<String, String> paramsMap) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Pack Initiate API Call ===");
+        System.out.println("Endpoint: " + PACK_INITIATE + pickContainer);
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("User-Uuid", config.getWmsUserUuid())
+                .params(paramsMap)
+                .when()
+                .get(PACK_INITIATE + pickContainer)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Get FIM Container Detail
+     */
+    public static Response getFimContainerDetail(String containerId, Map<String, String> paramsMap) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Get FIM Container Detail API Call ===");
+        System.out.println("Endpoint: " + FIM_CONTAINER_DETAIL + containerId);
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("User-Uuid", config.getWmsUserUuid())
+                .params(paramsMap)
+                .when()
+                .get(FIM_CONTAINER_DETAIL + containerId)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Complete Box
+     */
+    public static Response completeBox(CompleteBoxRequest request) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Complete Box API Call ===");
+        System.out.println("Endpoint: " + COMPLETE_BOX);
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("User-Uuid", config.getWmsUserUuid())
+                .body(request)
+                .when()
+                .post(COMPLETE_BOX)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Pack Shipment
+     */
+    public static Response packShipment(ShipmentPackRequest request) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Pack Shipment API Call ===");
+        System.out.println("Endpoint: " + SHIPMENT_PACK);
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("User-Uuid", config.getWmsUserUuid())
+                .body(request)
+                .when()
+                .post(SHIPMENT_PACK)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Fetch Auto Dimensions at RTS
+     */
+    public static Response fetchAutoDimensions(Map<String, String> paramsMap) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Fetch Auto Dimensions API Call ===");
+        System.out.println("Endpoint: " + FETCH_AUTO_DIMENSIONS);
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("User-Uuid", config.getWmsUserUuid())
+                .params(paramsMap)
+                .when()
+                .get(FETCH_AUTO_DIMENSIONS)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Save Auto Dimensions (RTS)
+     */
+    public static Response saveAutoDimensions(RtsRequest request) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Save Auto Dimensions API Call ===");
+        System.out.println("Endpoint: " + SAVE_AUTO_DIMENSIONS);
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("User-Uuid", config.getWmsUserUuid())
+                .body(request)
+                .when()
+                .post(SAVE_AUTO_DIMENSIONS)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Create Dispatch
+     */
+    public static Response createDispatch(CreateDispatchRequest request) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Create Dispatch API Call ===");
+        System.out.println("Endpoint: " + CREATE_DISPATCH);
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("User-Uuid", config.getWmsUserUuid())
+                .body(request)
+                .when()
+                .post(CREATE_DISPATCH)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Add Waybill to Dispatch
+     */
+    public static Response addWaybill(AddWaybillRequest request) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Add Waybill to Dispatch API Call ===");
+        System.out.println("Endpoint: " + ADD_WAYBILL);
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("User-Uuid", config.getWmsUserUuid())
+                .body(request)
+                .when()
+                .post(ADD_WAYBILL)
+                .then()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Complete Dispatch
+     */
+    public static Response completeDispatch(CompleteDispatchRequest request) {
+        ConfigLoader config = ConfigLoader.getInstance();
+        String wmsToken = WmsAuthApi.getAccessToken();
+
+        System.out.println("=== WMS Complete Dispatch API Call ===");
+        System.out.println("Endpoint: " + COMPLETE_DISPATCH);
+
+        return given()
+                .baseUri(config.getWmsBaseUrl())
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + wmsToken)
+                .header("fc-uuid", config.getWmsFcUuid())
+                .header("User-Uuid", config.getWmsUserUuid())
+                .body(request)
+                .when()
+                .post(COMPLETE_DISPATCH)
                 .then()
                 .extract()
                 .response();
